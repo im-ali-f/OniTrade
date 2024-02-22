@@ -1,5 +1,6 @@
 package com.example.onitrade
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,7 +21,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,15 +35,41 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgs
 import com.example.onitrade.ui.theme.OniTradeTheme
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             var darkTheme = isSystemInDarkTheme()
             OniTradeTheme(darkTheme = darkTheme) {
-                HomeComp()
+                val navState = rememberNavController()
+                //scaffold
+                var scaffoldState = rememberScaffoldState()
+
+                    androidx.compose.material.Scaffold(
+                        scaffoldState = scaffoldState,
+                        topBar = {
+                            TopBarComp(navController = navState )
+                        }
+                    ) {
+                        //inside scaffold
+
+                        NavHost(navController = navState, startDestination = "homePage") {
+                            composable(route = "homePage") {
+                                HomeComp(navState)
+                            }
+                        }
+                        //end of scaffold
+                    }
+
+
+
             }
 
         }

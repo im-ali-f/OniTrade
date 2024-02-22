@@ -9,6 +9,7 @@ val iconColor = Color(0xFFA3A5AC)
 val mainRedColor = Color(0xFFFF2C7B)
 val mainGreenColor = Color(0xFF2CFF8C)
 val mainBorderColor = Color(0xFFFFFFFF)
+val mainYellowColor = Color(0xFFFFC90E)
 
 
 
