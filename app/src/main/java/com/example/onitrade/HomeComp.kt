@@ -94,344 +94,613 @@ fun HomeComp(navController: NavController) {
         Row(
             Modifier
                 .fillMaxWidth()
-
+                .background(Color.Red)
                 .horizontalScroll(scrollState)
         ) {
-            var fontColor= MaterialTheme.colorScheme.tertiary
-            var drawColor = MaterialTheme.colorScheme.primaryContainer
-            Spacer(modifier = Modifier.width(10.dp))
+            var fontColor = MaterialTheme.colorScheme.tertiary
+            val bgcColor = MaterialTheme.colorScheme.primaryContainer
+
             //in box har kodomesh ye item bayd bashe
-            Box(
-                modifier = Modifier
-                    .width(339.dp)
-            ) {
-                Canvas(modifier = Modifier
-                    .height(10.dp)
-                    .fillMaxWidth(0.03f), onDraw = {
-                    scale(33f, 1.5f) {
-                        drawCircle(drawColor, center = Offset(20f, 23f))
-                    }
-                })
 
-                Box(
-                    modifier = Modifier
-                        .width(339.dp)
-                        .height(171.dp)
-                        .padding(top = 14.dp, bottom = 14.dp)
-                        .clip(
-                            RoundedCornerShape(7.dp)
-                        )
-                        .background(drawColor)
-                ) {
-                    //inner topsec
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(10.dp)) {
-                        //row1
-                        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            Text(text = "Total Balance", fontSize = 11.5.sp, fontWeight = FontWeight(700), color = fontColor)
-                            IconButton(onClick = { /*TODO*/ }, modifier = Modifier.size(20.dp)) {
-                                Icon(painter = painterResource(id = R.drawable.eye), contentDescription = null , tint = iconColor)
-                            }
-                        }
-                        //row2
-                        Row(Modifier.fillMaxWidth()) {
-                            Text(text = buildAnnotatedString {
-                                withStyle(SpanStyle(fontSize = 27.sp, fontWeight = FontWeight(500), color = fontColor)){
-                                    append("234.")
-                                }
+            fun genPath(size: Size): Path {
+                val innerPath = Path()
+                innerPath.cubicTo(
+                    x1 = 0f,
+                    y1 = 0f,
+                    x2 = size.width / 2,
+                    y2 = -30f,
+                    x3 = size.width,
+                    y3 = 0f
+                )
+                innerPath.lineTo(size.width, size.height)
+                innerPath.cubicTo(
+                    x1 = size.width,
+                    y1 = size.height,
+                    x2 = size.width / 2,
+                    y2 = size.height + 30,
+                    x3 = 0f,
+                    y3 = size.height
+                )
+                innerPath.lineTo(0f, 0f)
+                innerPath.close()
 
-                                withStyle(SpanStyle(fontSize = 27.sp, fontWeight = FontWeight(250), color = fontColor)){
-                                    append("45698245")
-                                }
-
-                                withStyle(SpanStyle(fontSize = 27.sp, fontWeight = FontWeight(250), color = fontColor)){
-                                    append("  "+"BTC")
-                                }
-                            })
-                        }
-
-                        //row 3
-                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                            Text(text = "$10,554.88",fontSize = 14.sp, fontWeight = FontWeight(400), color = fontColor)
-                            Spacer(modifier = Modifier.width(20.dp))
-                            Row (Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically){
-                                Text(text = "1.445%",fontSize = 14.sp, fontWeight = FontWeight(400), color = mainRedColor)
-                                Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null, tint = mainRedColor)
-                            }
-
-                        }
-                        //row4
-                        var BTN1 by remember {
-                            mutableStateOf(true)
-                        }
-                        Spacer(modifier = Modifier.height(10.dp))
-                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                            Button(onClick = { BTN1 = true }, modifier = Modifier.size(120.dp,30.dp), colors = ButtonDefaults.buttonColors(
-                                containerColor = if(BTN1)MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
-                            ), contentPadding = PaddingValues(start = 5.dp, top = 0.dp, bottom = 0.dp, end = 5.dp)) {
-                                Row( Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(imageVector = Icons.Default.Add, contentDescription = null , tint = mainfontDark)
-                                    Spacer(modifier = Modifier.width(10.dp))
-                                    Text(text = "Deposit",fontSize = 15.sp, fontWeight = FontWeight(400), color = if(BTN1) mainfontDark else fontColor)
-                                }
-
-                            }
-                            Spacer(modifier = Modifier.width(5.dp))
-                            Button(onClick = { BTN1 = false }, modifier = Modifier.size(120.dp,30.dp), colors = ButtonDefaults.buttonColors(
-                                containerColor = if(!BTN1)MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
-                            ), contentPadding = PaddingValues(0.dp)
-                            ) {
-                                Row( Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-                                    Text(text = "Withdraw",fontSize = 15.sp, fontWeight = FontWeight(400), color = if(!BTN1) mainfontDark else fontColor)
-                                }
-
-                            }
-
-                        }
-                        
-                        
-                        //rows ended
-
-
-
-                    }
-                    //end inner
-                }
-
-                Canvas(modifier = Modifier
-                    .height(10.dp)
-                    .fillMaxWidth(0.03f), onDraw = {
-                    scale(33f, 1.5f) {
-                        drawCircle(drawColor, center = Offset(20f, 212.5f))
-                    }
-                })
+                return innerPath
 
             }
 
-            Spacer(modifier = Modifier.width(10.dp))
 
-            Box(
-                modifier = Modifier
-                    .width(339.dp)
-            ) {
-                Canvas(modifier = Modifier
-                    .height(10.dp)
-                    .fillMaxWidth(0.03f), onDraw = {
-                    scale(33f, 1.5f) {
-                        drawCircle(drawColor, center = Offset(20f, 23f))
+            //1 bar mikhaym
+            fun Modifier.shadow(
+                color: Color = Color.Black,
+                offsetX: Dp = 0.dp,
+                offsetY: Dp = 0.dp,
+                blurRadius: Dp = 0.5.dp,
+            ) = then(
+                drawWithCache {
+                    onDrawBehind {
+                        drawIntoCanvas { canvas ->
+                            val paint = Paint()
+                            val frameworkPaint = paint.asFrameworkPaint()
+                            if (blurRadius != 0.dp) {
+                                frameworkPaint.maskFilter =
+                                    (BlurMaskFilter(blurRadius.toPx(), BlurMaskFilter.Blur.NORMAL))
+                            }
+                            frameworkPaint.color = color.toArgb()
+
+
+                            fun genPath2(size: Size): Path {
+                                val innerPath = Path()
+                                innerPath.cubicTo(
+                                    x1 = 0f,
+                                    y1 = 0f,
+                                    x2 = size.width / 2,
+                                    y2 = -20f,
+                                    x3 = size.width,
+                                    y3 = 0f
+                                )
+                                innerPath.lineTo(size.width, size.height)
+                                innerPath.cubicTo(
+                                    x1 = size.width,
+                                    y1 = size.height,
+                                    x2 = size.width / 2,
+                                    y2 = size.height + 30,
+                                    x3 = 0f,
+                                    y3 = size.height
+                                )
+                                innerPath.lineTo(0f, 0f)
+                                innerPath.close()
+
+                                return innerPath
+                            }
+
+                            val path = genPath2(size)
+
+
+
+                            canvas.drawPath(path, paint)
+
+                        }
                     }
-                })
-
-                Box(
-                    modifier = Modifier
-                        .width(339.dp)
-                        .height(171.dp)
-                        .padding(top = 14.dp, bottom = 14.dp)
-                        .clip(
-                            RoundedCornerShape(7.dp)
-                        )
-                        .background(drawColor)
-                ) {
-                    //inner topsec
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(10.dp)) {
-                        //row1
-                        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            Text(text = "Total Balance", fontSize = 11.5.sp, fontWeight = FontWeight(700), color = fontColor)
-                            IconButton(onClick = { /*TODO*/ }, modifier = Modifier.size(20.dp)) {
-                                Icon(painter = painterResource(id = R.drawable.eye), contentDescription = null , tint = iconColor)
-                            }
-                        }
-                        //row2
-                        Row(Modifier.fillMaxWidth()) {
-                            Text(text = buildAnnotatedString {
-                                withStyle(SpanStyle(fontSize = 27.sp, fontWeight = FontWeight(500), color = fontColor)){
-                                    append("234.")
-                                }
-
-                                withStyle(SpanStyle(fontSize = 27.sp, fontWeight = FontWeight(250), color = fontColor)){
-                                    append("45698245")
-                                }
-
-                                withStyle(SpanStyle(fontSize = 27.sp, fontWeight = FontWeight(250), color = fontColor)){
-                                    append("  "+"BTC")
-                                }
-                            })
-                        }
-
-                        //row 3
-                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                            Text(text = "$10,554.88",fontSize = 14.sp, fontWeight = FontWeight(400), color = fontColor)
-                            Spacer(modifier = Modifier.width(20.dp))
-                            Row (Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically){
-                                Text(text = "1.445%",fontSize = 14.sp, fontWeight = FontWeight(400), color = mainRedColor)
-                                Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null, tint = mainRedColor)
-                            }
-
-                        }
-                        //row4
-                        var BTN1 by remember {
-                            mutableStateOf(true)
-                        }
-                        Spacer(modifier = Modifier.height(10.dp))
-                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                            Button(onClick = { BTN1 = true }, modifier = Modifier.size(120.dp,30.dp), colors = ButtonDefaults.buttonColors(
-                                containerColor = if(BTN1)MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
-                            ), contentPadding = PaddingValues(start = 5.dp, top = 0.dp, bottom = 0.dp, end = 5.dp)) {
-                                Row( Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(imageVector = Icons.Default.Add, contentDescription = null , tint = mainfontDark)
-                                    Spacer(modifier = Modifier.width(10.dp))
-                                    Text(text = "Deposit",fontSize = 15.sp, fontWeight = FontWeight(400), color = if(BTN1) mainfontDark else fontColor)
-                                }
-
-                            }
-                            Spacer(modifier = Modifier.width(5.dp))
-                            Button(onClick = { BTN1 = false }, modifier = Modifier.size(120.dp,30.dp), colors = ButtonDefaults.buttonColors(
-                                containerColor = if(!BTN1)MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
-                            ), contentPadding = PaddingValues(0.dp)
-                            ) {
-                                Row( Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-                                    Text(text = "Withdraw",fontSize = 15.sp, fontWeight = FontWeight(400), color = if(!BTN1) mainfontDark else fontColor)
-                                }
-
-                            }
-
-                        }
-
-
-                        //rows ended
-
-
-
-                    }
-                    //end inner
                 }
 
-                Canvas(modifier = Modifier
-                    .height(10.dp)
-                    .fillMaxWidth(0.03f), onDraw = {
-                    scale(33f, 1.5f) {
-                        drawCircle(drawColor, center = Offset(20f, 212.5f))
+            )
+            //end shadow
+
+            Box(modifier = Modifier
+                .width(355.dp)
+                .height(191.dp)
+                .padding(start = 5.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
+                .shadow()
+                .drawWithCache {
+                    onDrawBehind {
+                        val path = genPath(size)
+
+                        drawPath(path, bgcColor, style = Fill)
                     }
-                })
+                }
+            )
+            {
+
+                //inner topsec
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(10.dp)
+                ) {
+                    //row1
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Text(
+                            text = "Total Balance",
+                            fontSize = 11.5.sp,
+                            fontWeight = FontWeight(700),
+                            color = fontColor
+                        )
+                        IconButton(onClick = { /*TODO*/ }, modifier = Modifier.size(20.dp)) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.eye),
+                                contentDescription = null,
+                                tint = iconColor
+                            )
+                        }
+                    }
+                    //row2
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(text = buildAnnotatedString {
+                            withStyle(
+                                SpanStyle(
+                                    fontSize = 27.sp,
+                                    fontWeight = FontWeight(500),
+                                    color = fontColor
+                                )
+                            ) {
+                                append("234.")
+                            }
+
+                            withStyle(
+                                SpanStyle(
+                                    fontSize = 27.sp,
+                                    fontWeight = FontWeight(250),
+                                    color = fontColor
+                                )
+                            ) {
+                                append("45698245")
+                            }
+
+                            withStyle(
+                                SpanStyle(
+                                    fontSize = 27.sp,
+                                    fontWeight = FontWeight(250),
+                                    color = fontColor
+                                )
+                            ) {
+                                append("  " + "BTC")
+                            }
+                        })
+                    }
+
+                    //row 3
+                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "$10,554.88",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight(400),
+                            color = fontColor
+                        )
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Row(
+                            Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "1.445%",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight(400),
+                                color = mainRedColor
+                            )
+                            Icon(
+                                imageVector = Icons.Default.ArrowDropDown,
+                                contentDescription = null,
+                                tint = mainRedColor
+                            )
+                        }
+
+                    }
+                    //row4
+                    var BTN1 by remember {
+                        mutableStateOf(true)
+                    }
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                        Button(
+                            onClick = { BTN1 = true },
+                            modifier = Modifier.size(120.dp, 30.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = if (BTN1) MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
+                            ),
+                            contentPadding = PaddingValues(
+                                start = 5.dp,
+                                top = 0.dp,
+                                bottom = 0.dp,
+                                end = 5.dp
+                            )
+                        ) {
+                            Row(
+                                Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Add,
+                                    contentDescription = null,
+                                    tint = mainfontDark
+                                )
+                                Spacer(modifier = Modifier.width(10.dp))
+                                Text(
+                                    text = "Deposit",
+                                    fontSize = 15.sp,
+                                    fontWeight = FontWeight(400),
+                                    color = if (BTN1) mainfontDark else fontColor
+                                )
+                            }
+
+                        }
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Button(
+                            onClick = { BTN1 = false },
+                            modifier = Modifier.size(120.dp, 30.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = if (!BTN1) MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
+                            ),
+                            contentPadding = PaddingValues(0.dp)
+                        ) {
+                            Row(
+                                Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = "Withdraw",
+                                    fontSize = 15.sp,
+                                    fontWeight = FontWeight(400),
+                                    color = if (!BTN1) mainfontDark else fontColor
+                                )
+                            }
+
+                        }
+
+                    }
+
+
+                    //rows ended
+
+
+                }
+                //end inner
 
             }
 
-            Spacer(modifier = Modifier.width(10.dp))
+            Box(modifier = Modifier
+                .width(355.dp)
+                .height(191.dp)
+                .padding(start = 0.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
+                .shadow()
+                .drawWithCache {
+                    onDrawBehind {
+                        val path = genPath(size)
 
-            Box(
-                modifier = Modifier
-                    .width(339.dp)
-            ) {
-                Canvas(modifier = Modifier
-                    .height(10.dp)
-                    .fillMaxWidth(0.03f), onDraw = {
-                    scale(33f, 1.5f) {
-                        drawCircle(drawColor, center = Offset(20f, 23f))
+                        drawPath(path, bgcColor, style = Fill)
                     }
-                })
-
-                Box(
-                    modifier = Modifier
-                        .width(339.dp)
-                        .height(171.dp)
-                        .padding(top = 14.dp, bottom = 14.dp)
-                        .clip(
-                            RoundedCornerShape(7.dp)
-                        )
-                        .background(drawColor)
-                ) {
-                    //inner topsec
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(10.dp)) {
-                        //row1
-                        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            Text(text = "Total Balance", fontSize = 11.5.sp, fontWeight = FontWeight(700), color = fontColor)
-                            IconButton(onClick = { /*TODO*/ }, modifier = Modifier.size(20.dp)) {
-                                Icon(painter = painterResource(id = R.drawable.eye), contentDescription = null , tint = iconColor)
-                            }
-                        }
-                        //row2
-                        Row(Modifier.fillMaxWidth()) {
-                            Text(text = buildAnnotatedString {
-                                withStyle(SpanStyle(fontSize = 27.sp, fontWeight = FontWeight(500), color = fontColor)){
-                                    append("234.")
-                                }
-
-                                withStyle(SpanStyle(fontSize = 27.sp, fontWeight = FontWeight(250), color = fontColor)){
-                                    append("45698245")
-                                }
-
-                                withStyle(SpanStyle(fontSize = 27.sp, fontWeight = FontWeight(250), color = fontColor)){
-                                    append("  "+"BTC")
-                                }
-                            })
-                        }
-
-                        //row 3
-                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                            Text(text = "$10,554.88",fontSize = 14.sp, fontWeight = FontWeight(400), color = fontColor)
-                            Spacer(modifier = Modifier.width(20.dp))
-                            Row (Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically){
-                                Text(text = "1.445%",fontSize = 14.sp, fontWeight = FontWeight(400), color = mainRedColor)
-                                Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null, tint = mainRedColor)
-                            }
-
-                        }
-                        //row4
-                        var BTN1 by remember {
-                            mutableStateOf(true)
-                        }
-                        Spacer(modifier = Modifier.height(10.dp))
-                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                            Button(onClick = { BTN1 = true }, modifier = Modifier.size(120.dp,30.dp), colors = ButtonDefaults.buttonColors(
-                                containerColor = if(BTN1)MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
-                            ), contentPadding = PaddingValues(start = 5.dp, top = 0.dp, bottom = 0.dp, end = 5.dp)) {
-                                Row( Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(imageVector = Icons.Default.Add, contentDescription = null , tint = mainfontDark)
-                                    Spacer(modifier = Modifier.width(10.dp))
-                                    Text(text = "Deposit",fontSize = 15.sp, fontWeight = FontWeight(400), color = if(BTN1) mainfontDark else fontColor)
-                                }
-
-                            }
-                            Spacer(modifier = Modifier.width(5.dp))
-                            Button(onClick = { BTN1 = false }, modifier = Modifier.size(120.dp,30.dp), colors = ButtonDefaults.buttonColors(
-                                containerColor = if(!BTN1)MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
-                            ), contentPadding = PaddingValues(0.dp)
-                            ) {
-                                Row( Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-                                    Text(text = "Withdraw",fontSize = 15.sp, fontWeight = FontWeight(400), color = if(!BTN1) mainfontDark else fontColor)
-                                }
-
-                            }
-
-                        }
-
-
-                        //rows ended
-
-
-
-                    }
-                    //end inner
                 }
+            )
+            {
 
-                Canvas(modifier = Modifier
-                    .height(10.dp)
-                    .fillMaxWidth(0.03f), onDraw = {
-                    scale(33f, 1.5f) {
-                        drawCircle(drawColor, center = Offset(20f, 212.5f))
+                //inner topsec
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(10.dp)
+                ) {
+                    //row1
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Text(
+                            text = "Total Balance",
+                            fontSize = 11.5.sp,
+                            fontWeight = FontWeight(700),
+                            color = fontColor
+                        )
+                        IconButton(onClick = { /*TODO*/ }, modifier = Modifier.size(20.dp)) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.eye),
+                                contentDescription = null,
+                                tint = iconColor
+                            )
+                        }
                     }
-                })
+                    //row2
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(text = buildAnnotatedString {
+                            withStyle(
+                                SpanStyle(
+                                    fontSize = 27.sp,
+                                    fontWeight = FontWeight(500),
+                                    color = fontColor
+                                )
+                            ) {
+                                append("234.")
+                            }
+
+                            withStyle(
+                                SpanStyle(
+                                    fontSize = 27.sp,
+                                    fontWeight = FontWeight(250),
+                                    color = fontColor
+                                )
+                            ) {
+                                append("45698245")
+                            }
+
+                            withStyle(
+                                SpanStyle(
+                                    fontSize = 27.sp,
+                                    fontWeight = FontWeight(250),
+                                    color = fontColor
+                                )
+                            ) {
+                                append("  " + "BTC")
+                            }
+                        })
+                    }
+
+                    //row 3
+                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "$10,554.88",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight(400),
+                            color = fontColor
+                        )
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Row(
+                            Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "1.445%",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight(400),
+                                color = mainRedColor
+                            )
+                            Icon(
+                                imageVector = Icons.Default.ArrowDropDown,
+                                contentDescription = null,
+                                tint = mainRedColor
+                            )
+                        }
+
+                    }
+                    //row4
+                    var BTN1 by remember {
+                        mutableStateOf(true)
+                    }
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                        Button(
+                            onClick = { BTN1 = true },
+                            modifier = Modifier.size(120.dp, 30.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = if (BTN1) MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
+                            ),
+                            contentPadding = PaddingValues(
+                                start = 5.dp,
+                                top = 0.dp,
+                                bottom = 0.dp,
+                                end = 5.dp
+                            )
+                        ) {
+                            Row(
+                                Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Add,
+                                    contentDescription = null,
+                                    tint = mainfontDark
+                                )
+                                Spacer(modifier = Modifier.width(10.dp))
+                                Text(
+                                    text = "Deposit",
+                                    fontSize = 15.sp,
+                                    fontWeight = FontWeight(400),
+                                    color = if (BTN1) mainfontDark else fontColor
+                                )
+                            }
+
+                        }
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Button(
+                            onClick = { BTN1 = false },
+                            modifier = Modifier.size(120.dp, 30.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = if (!BTN1) MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
+                            ),
+                            contentPadding = PaddingValues(0.dp)
+                        ) {
+                            Row(
+                                Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = "Withdraw",
+                                    fontSize = 15.sp,
+                                    fontWeight = FontWeight(400),
+                                    color = if (!BTN1) mainfontDark else fontColor
+                                )
+                            }
+
+                        }
+
+                    }
+
+
+                    //rows ended
+
+
+                }
+                //end inner
 
             }
 
+            Box(modifier = Modifier
+                .width(355.dp)
+                .height(191.dp)
+                .padding(start = 0.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
+                .shadow()
+                .drawWithCache {
+                    onDrawBehind {
+                        val path = genPath(size)
+
+                        drawPath(path, bgcColor, style = Fill)
+                    }
+                }
+            )
+            {
+
+                //inner topsec
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(10.dp)
+                ) {
+                    //row1
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Text(
+                            text = "Total Balance",
+                            fontSize = 11.5.sp,
+                            fontWeight = FontWeight(700),
+                            color = fontColor
+                        )
+                        IconButton(onClick = { /*TODO*/ }, modifier = Modifier.size(20.dp)) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.eye),
+                                contentDescription = null,
+                                tint = iconColor
+                            )
+                        }
+                    }
+                    //row2
+                    Row(Modifier.fillMaxWidth()) {
+                        Text(text = buildAnnotatedString {
+                            withStyle(
+                                SpanStyle(
+                                    fontSize = 27.sp,
+                                    fontWeight = FontWeight(500),
+                                    color = fontColor
+                                )
+                            ) {
+                                append("234.")
+                            }
+
+                            withStyle(
+                                SpanStyle(
+                                    fontSize = 27.sp,
+                                    fontWeight = FontWeight(250),
+                                    color = fontColor
+                                )
+                            ) {
+                                append("45698245")
+                            }
+
+                            withStyle(
+                                SpanStyle(
+                                    fontSize = 27.sp,
+                                    fontWeight = FontWeight(250),
+                                    color = fontColor
+                                )
+                            ) {
+                                append("  " + "BTC")
+                            }
+                        })
+                    }
+
+                    //row 3
+                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "$10,554.88",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight(400),
+                            color = fontColor
+                        )
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Row(
+                            Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "1.445%",
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight(400),
+                                color = mainRedColor
+                            )
+                            Icon(
+                                imageVector = Icons.Default.ArrowDropDown,
+                                contentDescription = null,
+                                tint = mainRedColor
+                            )
+                        }
+
+                    }
+                    //row4
+                    var BTN1 by remember {
+                        mutableStateOf(true)
+                    }
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                        Button(
+                            onClick = { BTN1 = true },
+                            modifier = Modifier.size(120.dp, 30.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = if (BTN1) MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
+                            ),
+                            contentPadding = PaddingValues(
+                                start = 5.dp,
+                                top = 0.dp,
+                                bottom = 0.dp,
+                                end = 5.dp
+                            )
+                        ) {
+                            Row(
+                                Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Add,
+                                    contentDescription = null,
+                                    tint = mainfontDark
+                                )
+                                Spacer(modifier = Modifier.width(10.dp))
+                                Text(
+                                    text = "Deposit",
+                                    fontSize = 15.sp,
+                                    fontWeight = FontWeight(400),
+                                    color = if (BTN1) mainfontDark else fontColor
+                                )
+                            }
+
+                        }
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Button(
+                            onClick = { BTN1 = false },
+                            modifier = Modifier.size(120.dp, 30.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = if (!BTN1) MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
+                            ),
+                            contentPadding = PaddingValues(0.dp)
+                        ) {
+                            Row(
+                                Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = "Withdraw",
+                                    fontSize = 15.sp,
+                                    fontWeight = FontWeight(400),
+                                    color = if (!BTN1) mainfontDark else fontColor
+                                )
+                            }
+
+                        }
+
+                    }
+
+
+                    //rows ended
+
+
+                }
+                //end inner
+
+            }
 
 
         }
@@ -440,40 +709,45 @@ fun HomeComp(navController: NavController) {
         var turn by remember {
             mutableStateOf(1)
         }
-        Row (
+        Row(
             Modifier
-                .fillMaxWidth()
-                , verticalAlignment = Alignment.CenterVertically
-        , horizontalArrangement = Arrangement.Center){
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
             //box koli
 
-            Box{
-                Box(modifier = Modifier
-                    .size(if (turn == 1) 30.dp else 7.dp, 7.dp)
+            Box {
+                Box(
+                    modifier = Modifier
+                        .size(if (turn == 1) 30.dp else 7.dp, 7.dp)
+                        .clip(RoundedCornerShape(100))
+                        .background(MaterialTheme.colorScheme.primaryContainer)
+                )
+            }
+            Spacer(modifier = Modifier.width(5.dp))
+            Box(
+                modifier = Modifier
+                    .size(if (turn == 2) 30.dp else 7.dp, 7.dp)
                     .clip(RoundedCornerShape(100))
-                    .background(MaterialTheme.colorScheme.primaryContainer))
-            }
-            Spacer(modifier = Modifier.width(5.dp))
-            Box(modifier = Modifier
-                .size(if (turn == 2) 30.dp else 7.dp, 7.dp)
-                .clip(RoundedCornerShape(100))
-                .background(MaterialTheme.colorScheme.primaryContainer) )
+                    .background(MaterialTheme.colorScheme.primaryContainer)
+            )
 
             Spacer(modifier = Modifier.width(5.dp))
-            Box(modifier = Modifier
-                .size(if (turn == 3) 30.dp else 7.dp, 7.dp)
-                .clip(RoundedCornerShape(100))
-                .background(MaterialTheme.colorScheme.primaryContainer) )
+            Box(
+                modifier = Modifier
+                    .size(if (turn == 3) 30.dp else 7.dp, 7.dp)
+                    .clip(RoundedCornerShape(100))
+                    .background(MaterialTheme.colorScheme.primaryContainer)
+            )
 
 
-            if(scrollState.value>350 && scrollState.value<1050 ){
-                turn =2
-            }
-            else if(scrollState.value>=1050){
-                turn =3
-            }
-            else{
-                turn =1
+            if (scrollState.value > 350 && scrollState.value < 1050) {
+                turn = 2
+            } else if (scrollState.value >= 1050) {
+                turn = 3
+            } else {
+                turn = 1
             }
         }
 
@@ -490,80 +764,6 @@ fun HomeComp(navController: NavController) {
         */
 
         //sec 2
-
-        fun genPath(size: Size):Path{
-            val innerPath= Path()
-            innerPath.cubicTo(x1 = 0f, y1 = 0f, x2 = size.width/2, y2 = -30f, x3 = size.width, y3 = 0f)
-            innerPath.lineTo(size.width,size.height)
-            innerPath.cubicTo(x1 = size.width, y1 = size.height, x2 = size.width/2, y2 = size.height+30, x3 = 0f, y3 = size.height)
-            innerPath.lineTo(0f,0f)
-            innerPath.close()
-
-            return innerPath
-
-        }
-
-        val bgcColor = MaterialTheme.colorScheme.primaryContainer
-        //1 bar mikhaym
-        fun Modifier.shadow(
-            color: Color = Color.Black,
-            offsetX: Dp = 0.dp,
-            offsetY: Dp = 0.dp,
-            blurRadius: Dp = 0.5.dp,
-        ) = then(
-            drawWithCache {
-                onDrawBehind {
-                    drawIntoCanvas { canvas ->
-                        val paint = Paint()
-                        val frameworkPaint = paint.asFrameworkPaint()
-                        if (blurRadius != 0.dp) {
-                            frameworkPaint.maskFilter = (BlurMaskFilter(blurRadius.toPx(), BlurMaskFilter.Blur.NORMAL))
-                        }
-                        frameworkPaint.color = color.toArgb()
-
-
-                        fun genPath2(size:Size):Path{
-                            val innerPath= Path()
-                            innerPath.cubicTo(x1 = 0f, y1 = 0f, x2 = size.width/2, y2 = -20f, x3 = size.width, y3 = 0f)
-                            innerPath.lineTo(size.width,size.height)
-                            innerPath.cubicTo(x1 = size.width, y1 = size.height, x2 = size.width/2, y2 = size.height+30, x3 = 0f, y3 = size.height)
-                            innerPath.lineTo(0f,0f)
-                            innerPath.close()
-
-                            return innerPath
-                        }
-
-                        val path = genPath2(size)
-
-
-
-                        canvas.drawPath(path, paint)
-
-                    }
-                }
-            }
-
-        )
-        //end shadow
-
-        Box(modifier = Modifier
-            .fillMaxWidth(0.95f)
-            .height(171.dp)
-            .padding(10.dp)
-            .shadow()
-            .drawWithCache {
-                onDrawBehind {
-                    val path = genPath(size)
-
-                    drawPath(path, bgcColor, style = Fill)
-                }
-            }
-            .align(Alignment.CenterHorizontally)
-            )
-        {
-
-        }
-
 
 
         //sec 3
@@ -602,11 +802,11 @@ fun DrawCubic() {
      */
         var x1 by remember { mutableStateOf(0f) }
         var y1 by remember { mutableStateOf(screenWidthInPx) }
-        var x2 by remember { mutableStateOf(screenWidthInPx/2) }
+        var x2 by remember { mutableStateOf(screenWidthInPx / 2) }
         var y2 by remember { mutableStateOf(0f) }
 
         var x3 by remember { mutableStateOf(screenWidthInPx) }
-        var y3 by remember { mutableStateOf(screenWidthInPx/2) }
+        var y3 by remember { mutableStateOf(screenWidthInPx / 2) }
 
         val path = remember { Path() }
         Canvas(
