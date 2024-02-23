@@ -42,7 +42,7 @@ import androidx.navigation.navArgs
 import com.example.onitrade.ui.theme.OniTradeTheme
 
 class MainActivity : ComponentActivity() {
-    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -63,6 +63,7 @@ class MainActivity : ComponentActivity() {
                         NavHost(navController = navState, startDestination = "homePage") {
                             composable(route = "homePage") {
                                 HomeComp(navState)
+                                //DrawCubic()
                             }
                         }
                         //end of scaffold
