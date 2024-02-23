@@ -1,5 +1,7 @@
 package com.example.onitrade
 
+import android.graphics.BlurMaskFilter
+import android.graphics.Typeface.NORMAL
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import androidx.compose.foundation.Canvas
@@ -15,6 +17,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -46,6 +49,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.PointMode
@@ -54,6 +58,7 @@ import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -497,22 +502,63 @@ fun HomeComp(navController: NavController) {
             return innerPath
 
         }
+
         val bgcColor = MaterialTheme.colorScheme.primaryContainer
+        //1 bar mikhaym
+        fun Modifier.shadow(
+            color: Color = Color.Black,
+            offsetX: Dp = 0.dp,
+            offsetY: Dp = 0.dp,
+            blurRadius: Dp = 0.5.dp,
+        ) = then(
+            drawWithCache {
+                onDrawBehind {
+                    drawIntoCanvas { canvas ->
+                        val paint = Paint()
+                        val frameworkPaint = paint.asFrameworkPaint()
+                        if (blurRadius != 0.dp) {
+                            frameworkPaint.maskFilter = (BlurMaskFilter(blurRadius.toPx(), BlurMaskFilter.Blur.NORMAL))
+                        }
+                        frameworkPaint.color = color.toArgb()
+
+
+                        fun genPath2(size:Size):Path{
+                            val innerPath= Path()
+                            innerPath.cubicTo(x1 = 0f, y1 = 0f, x2 = size.width/2, y2 = -20f, x3 = size.width, y3 = 0f)
+                            innerPath.lineTo(size.width,size.height)
+                            innerPath.cubicTo(x1 = size.width, y1 = size.height, x2 = size.width/2, y2 = size.height+30, x3 = 0f, y3 = size.height)
+                            innerPath.lineTo(0f,0f)
+                            innerPath.close()
+
+                            return innerPath
+                        }
+
+                        val path = genPath2(size)
+
+
+
+                        canvas.drawPath(path, paint)
+
+                    }
+                }
+            }
+
+        )
+        //end shadow
 
         Box(modifier = Modifier
             .fillMaxWidth(0.95f)
             .height(171.dp)
             .padding(10.dp)
-            .background(Color.LightGray)
+            .shadow()
             .drawWithCache {
                 onDrawBehind {
                     val path = genPath(size)
 
-                    drawPath(path, Color.Yellow, style = Fill)
+                    drawPath(path, bgcColor, style = Fill)
                 }
             }
             .align(Alignment.CenterHorizontally)
-
             )
         {
 
