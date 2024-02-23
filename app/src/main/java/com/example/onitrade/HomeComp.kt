@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -81,110 +82,113 @@ import kotlin.math.roundToInt
 
 @Composable
 fun HomeComp(navController: NavController) {
+    val scrollState= rememberScrollState()
     Column(
         Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.primary)
+            .verticalScroll(scrollState)
     ) {
 
         //start body
+        fun genPath(size: Size): Path {
+            val innerPath = Path()
+            innerPath.cubicTo(
+                x1 = 0f,
+                y1 = 0f,
+                x2 = size.width / 2,
+                y2 = -30f,
+                x3 = size.width,
+                y3 = 0f
+            )
+            innerPath.lineTo(size.width, size.height)
+            innerPath.cubicTo(
+                x1 = size.width,
+                y1 = size.height,
+                x2 = size.width / 2,
+                y2 = size.height + 30,
+                x3 = 0f,
+                y3 = size.height
+            )
+            innerPath.lineTo(0f, 0f)
+            innerPath.close()
+
+            return innerPath
+
+        }
+
+        var fontColor = MaterialTheme.colorScheme.tertiary
+        val bgcColor = MaterialTheme.colorScheme.primaryContainer
+        //1 bar mikhaym
+        fun Modifier.shadow(
+            color: Color = Color.Black,
+            offsetX: Dp = 0.dp,
+            offsetY: Dp = 0.dp,
+            blurRadius: Dp = 0.5.dp,
+        ) = then(
+            drawWithCache {
+                onDrawBehind {
+                    drawIntoCanvas { canvas ->
+                        val paint = Paint()
+                        val frameworkPaint = paint.asFrameworkPaint()
+                        if (blurRadius != 0.dp) {
+                            frameworkPaint.maskFilter =
+                                (BlurMaskFilter(blurRadius.toPx(), BlurMaskFilter.Blur.NORMAL))
+                        }
+                        frameworkPaint.color = color.toArgb()
+
+
+                        fun genPath2(size: Size): Path {
+                            val innerPath = Path()
+                            innerPath.cubicTo(
+                                x1 = 0f,
+                                y1 = 0f,
+                                x2 = size.width / 2,
+                                y2 = -20f,
+                                x3 = size.width,
+                                y3 = 0f
+                            )
+                            innerPath.lineTo(size.width, size.height)
+                            innerPath.cubicTo(
+                                x1 = size.width,
+                                y1 = size.height,
+                                x2 = size.width / 2,
+                                y2 = size.height + 30,
+                                x3 = 0f,
+                                y3 = size.height
+                            )
+                            innerPath.lineTo(0f, 0f)
+                            innerPath.close()
+
+                            return innerPath
+                        }
+
+                        val path = genPath2(size)
+
+
+
+                        canvas.drawPath(path, paint)
+
+                    }
+                }
+            }
+
+        )
+        //end shadow
+
 
         //sec 1
         var scrollState = rememberScrollState()
         Row(
             Modifier
                 .fillMaxWidth()
-                .background(Color.Red)
+                //.background(Color.Red)
                 .horizontalScroll(scrollState)
         ) {
-            var fontColor = MaterialTheme.colorScheme.tertiary
-            val bgcColor = MaterialTheme.colorScheme.primaryContainer
+
 
             //in box har kodomesh ye item bayd bashe
 
-            fun genPath(size: Size): Path {
-                val innerPath = Path()
-                innerPath.cubicTo(
-                    x1 = 0f,
-                    y1 = 0f,
-                    x2 = size.width / 2,
-                    y2 = -30f,
-                    x3 = size.width,
-                    y3 = 0f
-                )
-                innerPath.lineTo(size.width, size.height)
-                innerPath.cubicTo(
-                    x1 = size.width,
-                    y1 = size.height,
-                    x2 = size.width / 2,
-                    y2 = size.height + 30,
-                    x3 = 0f,
-                    y3 = size.height
-                )
-                innerPath.lineTo(0f, 0f)
-                innerPath.close()
-
-                return innerPath
-
-            }
-
-
-            //1 bar mikhaym
-            fun Modifier.shadow(
-                color: Color = Color.Black,
-                offsetX: Dp = 0.dp,
-                offsetY: Dp = 0.dp,
-                blurRadius: Dp = 0.5.dp,
-            ) = then(
-                drawWithCache {
-                    onDrawBehind {
-                        drawIntoCanvas { canvas ->
-                            val paint = Paint()
-                            val frameworkPaint = paint.asFrameworkPaint()
-                            if (blurRadius != 0.dp) {
-                                frameworkPaint.maskFilter =
-                                    (BlurMaskFilter(blurRadius.toPx(), BlurMaskFilter.Blur.NORMAL))
-                            }
-                            frameworkPaint.color = color.toArgb()
-
-
-                            fun genPath2(size: Size): Path {
-                                val innerPath = Path()
-                                innerPath.cubicTo(
-                                    x1 = 0f,
-                                    y1 = 0f,
-                                    x2 = size.width / 2,
-                                    y2 = -20f,
-                                    x3 = size.width,
-                                    y3 = 0f
-                                )
-                                innerPath.lineTo(size.width, size.height)
-                                innerPath.cubicTo(
-                                    x1 = size.width,
-                                    y1 = size.height,
-                                    x2 = size.width / 2,
-                                    y2 = size.height + 30,
-                                    x3 = 0f,
-                                    y3 = size.height
-                                )
-                                innerPath.lineTo(0f, 0f)
-                                innerPath.close()
-
-                                return innerPath
-                            }
-
-                            val path = genPath2(size)
-
-
-
-                            canvas.drawPath(path, paint)
-
-                        }
-                    }
-                }
-
-            )
-            //end shadow
 
             Box(modifier = Modifier
                 .width(355.dp)
@@ -717,18 +721,21 @@ fun HomeComp(navController: NavController) {
         ) {
             //box koli
 
-            Box {
+
                 Box(
                     modifier = Modifier
                         .size(if (turn == 1) 30.dp else 7.dp, 7.dp)
+                        .shadow(3.dp, RoundedCornerShape(100))
                         .clip(RoundedCornerShape(100))
                         .background(MaterialTheme.colorScheme.primaryContainer)
+
                 )
-            }
+
             Spacer(modifier = Modifier.width(5.dp))
             Box(
                 modifier = Modifier
                     .size(if (turn == 2) 30.dp else 7.dp, 7.dp)
+                    .shadow(3.dp, RoundedCornerShape(100))
                     .clip(RoundedCornerShape(100))
                     .background(MaterialTheme.colorScheme.primaryContainer)
             )
@@ -737,6 +744,7 @@ fun HomeComp(navController: NavController) {
             Box(
                 modifier = Modifier
                     .size(if (turn == 3) 30.dp else 7.dp, 7.dp)
+                    .shadow(3.dp, RoundedCornerShape(100))
                     .clip(RoundedCornerShape(100))
                     .background(MaterialTheme.colorScheme.primaryContainer)
             )
@@ -766,6 +774,40 @@ fun HomeComp(navController: NavController) {
         //sec 2
 
 
+        Box(modifier = Modifier
+            .width(355.dp)
+            .height(400.dp)
+            .padding(start = 5.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
+            .shadow()
+            .drawWithCache {
+                onDrawBehind {
+                    val path = genPath(size)
+
+                    drawPath(path, bgcColor, style = Fill)
+                }
+            }
+            .align(Alignment.CenterHorizontally)
+        )
+        {
+
+            //inner topsec
+            Row (
+                Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween){
+                Row (){
+                    Text(text = "In Order: ", fontWeight = FontWeight(300), fontSize = 14.sp, color = fontColor)
+                    Text(text = " 256.45 BTC", fontWeight = FontWeight(700), fontSize = 14.sp, color = fontColor)
+
+                }
+                //inja bayad ye status bar biad
+
+            }
+
+            //end inner
+
+        }
+
         //sec 3
 
         //sec 4
@@ -774,129 +816,4 @@ fun HomeComp(navController: NavController) {
         //end body
     }
 
-}
-
-@Composable
-fun DrawCubic() {
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
-
-        val density = LocalDensity.current.density
-
-        val configuration = LocalConfiguration.current
-        val screenWidth = configuration.screenWidthDp.dp
-
-        val screenWidthInPx = screenWidth.value * density
-
-        // (x0, y0) is initial coordinate where path is moved with path.moveTo(x0,y0)
-        var x0 by remember { mutableStateOf(0f) }
-        var y0 by remember { mutableStateOf(0f) }
-
-        /*
-        Adds a cubic bezier segment that curves from the current point(x0,y0) to the
-        given point (x3, y3), using the control points (x1, y1) and (x2, y2).
-     */
-        var x1 by remember { mutableStateOf(0f) }
-        var y1 by remember { mutableStateOf(screenWidthInPx) }
-        var x2 by remember { mutableStateOf(screenWidthInPx / 2) }
-        var y2 by remember { mutableStateOf(0f) }
-
-        var x3 by remember { mutableStateOf(screenWidthInPx) }
-        var y3 by remember { mutableStateOf(screenWidthInPx / 2) }
-
-        val path = remember { Path() }
-        Canvas(
-            modifier = Modifier
-                .padding(8.dp)
-                .shadow(1.dp)
-                .background(Color.White)
-                .size(screenWidth, screenWidth / 2)
-        ) {
-            path.reset()
-            path.moveTo(x0, y0)
-            path.cubicTo(x1 = x1, y1 = y1, x2 = x2, y2 = y2, x3 = x3, y3 = y3)
-
-
-            drawPath(
-                color = Color.Green,
-                path = path,
-                style = Stroke(
-                    width = 3.dp.toPx(),
-                    pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f))
-                )
-            )
-
-            // Draw Control Points on screen
-            drawPoints(
-                listOf(Offset(x1, y1), Offset(x2, y2)),
-                color = Color.Green,
-                pointMode = PointMode.Points,
-                cap = StrokeCap.Round,
-                strokeWidth = 40f
-            )
-        }
-
-        Column(modifier = Modifier.padding(horizontal = 20.dp)) {
-
-            Text(text = "X0: ${x0.roundToInt()}")
-            Slider(
-                value = x0,
-                onValueChange = { x0 = it },
-                valueRange = 0f..screenWidthInPx,
-            )
-
-            Text(text = "Y0: ${y0.roundToInt()}")
-            Slider(
-                value = y0,
-                onValueChange = { y0 = it },
-                valueRange = 0f..screenWidthInPx,
-            )
-
-            Text(text = "X1: ${x1.roundToInt()}")
-            Slider(
-                value = x1,
-                onValueChange = { x1 = it },
-                valueRange = 0f..screenWidthInPx,
-            )
-
-            Text(text = "Y1: ${y1.roundToInt()}")
-            Slider(
-                value = y1,
-                onValueChange = { y1 = it },
-                valueRange = 0f..screenWidthInPx,
-            )
-
-            Text(text = "X2: ${x2.roundToInt()}")
-            Slider(
-                value = x2,
-                onValueChange = { x2 = it },
-                valueRange = 0f..screenWidthInPx,
-            )
-
-            Text(text = "Y2: ${y2.roundToInt()}")
-            Slider(
-                value = y2,
-                onValueChange = { y2 = it },
-                valueRange = 0f..screenWidthInPx,
-            )
-
-            Text(text = "X3: ${x3.roundToInt()}")
-            Slider(
-                value = x3,
-                onValueChange = { x3 = it },
-                valueRange = 0f..screenWidthInPx,
-            )
-
-            Text(text = "Y3: ${y3.roundToInt()}")
-            Slider(
-                value = y3,
-                onValueChange = { y3 = it },
-                valueRange = 0f..screenWidthInPx,
-            )
-        }
-    }
 }
