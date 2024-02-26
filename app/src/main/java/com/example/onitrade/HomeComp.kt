@@ -77,6 +77,7 @@ import com.example.onitrade.ui.theme.ETHColor
 import com.example.onitrade.ui.theme.PPCColor
 import com.example.onitrade.ui.theme.iconColor
 import com.example.onitrade.ui.theme.mainFontColorStatic
+import com.example.onitrade.ui.theme.mainGreenColor
 import com.example.onitrade.ui.theme.mainRedColor
 import com.example.onitrade.ui.theme.mainSeperatorColor
 import com.example.onitrade.ui.theme.mainYellowColor
@@ -823,10 +824,11 @@ fun HomeComp(navController: NavController) {
             return innerPath
 
         }
-        var BTNColor= MaterialTheme.colorScheme.secondary
+
+        var BTNColor = MaterialTheme.colorScheme.secondary
         Box(modifier = Modifier
             .width(355.dp)
-            .height(310.dp)
+            .height(360.dp)
             .padding(start = 5.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
             .shadow()
             .drawWithCache {
@@ -937,16 +939,21 @@ fun HomeComp(navController: NavController) {
 
                 //sec 2.2
                 Spacer(modifier = Modifier.height(15.dp))
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .height(0.7.dp)
-                    .background(mainSeperatorColor))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(0.7.dp)
+                        .background(mainSeperatorColor)
+                )
                 //sec 2.3
                 Spacer(modifier = Modifier.height(15.dp))
-                Row (
+                Row(
                     Modifier
                         .fillMaxWidth(0.6f)
-                        .padding(start = 15.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween){
+                        .padding(start = 20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
 
                     var selected by remember {
                         mutableStateOf(1)
@@ -1027,13 +1034,17 @@ fun HomeComp(navController: NavController) {
                     }
 
 
-                    IconButton(onClick = { selected = 3 }, modifier = Modifier
+                    IconButton(onClick = { selected = 0 }, modifier = Modifier
 
                         .drawWithCache {
                             onDrawBehind {
                                 val path = genPathBTN(size)
-                                val stroke = Stroke(width = 3f,
-                                    pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
+                                val stroke = Stroke(
+                                    width = 3f,
+                                    pathEffect = PathEffect.dashPathEffect(
+                                        floatArrayOf(10f, 10f),
+                                        0f
+                                    )
                                 )
 
                                 drawPath(
@@ -1064,7 +1075,102 @@ fun HomeComp(navController: NavController) {
                 }
 
                 //sec2.4
+                Spacer(modifier = Modifier.height(10.dp))
+                Column {
+                    Row(Modifier.fillMaxWidth()) {
+                        Row(Modifier.padding(start = 20.dp)) {
+                            Text(
+                                text = buildAnnotatedString {
+                                    withStyle(
+                                        SpanStyle(
+                                            fontWeight = FontWeight(300),
+                                            fontSize = 12.sp,
+                                            color = fontColor
+                                        )
+                                    ) {
+                                        append("Last Price: ")
+                                    }
+                                    withStyle(SpanStyle(fontWeight = FontWeight(500),
+                                        fontSize = 14.sp,
+                                        color = fontColor)) {
+                                        append("11110")
+                                    }
+                                    withStyle(SpanStyle(fontWeight = FontWeight(300),
+                                        fontSize = 12.sp,
+                                        color = fontColor)) {
+                                        append(".23 USD")
+                                    }
+                                }
+                            )
 
+                        }
+                    }
+
+                    Row(Modifier.fillMaxWidth()) {
+                        Row(
+                            Modifier
+                                .padding(start = 20.dp)
+                                .fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text = buildAnnotatedString {
+                                    withStyle(
+                                        SpanStyle(
+                                            fontWeight = FontWeight(300),
+                                            fontSize = 12.sp,
+                                            color = fontColor
+                                        )
+                                    ) {
+                                        append("Low: ")
+                                    }
+                                    withStyle(SpanStyle(fontWeight = FontWeight(500),
+                                        fontSize = 14.sp,
+                                        color = fontColor)) {
+                                        append("853")
+                                    }
+                                    withStyle(SpanStyle(fontWeight = FontWeight(300),
+                                        fontSize = 12.sp,
+                                        color = fontColor)) {
+                                        append(".11 USD")
+                                    }
+                                }
+
+                            )
+                            Spacer(modifier = Modifier.width(15.dp))
+                            Text(
+                                text = buildAnnotatedString {
+                                    withStyle(
+                                        SpanStyle(
+                                            fontWeight = FontWeight(300),
+                                            fontSize = 12.sp,
+                                            color = mainGreenColor
+                                        )
+                                    ) {
+                                        append("High: ")
+                                    }
+                                    withStyle(SpanStyle(fontWeight = FontWeight(500),
+                                        fontSize = 14.sp,
+                                        color = mainGreenColor)) {
+                                        append("1495")
+                                    }
+                                    withStyle(SpanStyle(fontWeight = FontWeight(300),
+                                        fontSize = 12.sp,
+                                        color = mainGreenColor)) {
+                                        append(".86 USD")
+                                    }
+                                }
+
+                            )
+
+
+
+                        }
+                    }
+                }
+
+                //sec 2.5 most important
+
+
+                //sec 2.6
 
                 //sec 2.x
 
