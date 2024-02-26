@@ -96,7 +96,8 @@ fun HomeComp(navController: NavController) {
     val scrollState = rememberScrollState()
     Column(
         Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .fillMaxHeight(0.91f)
             .background(MaterialTheme.colorScheme.primary)
             .verticalScroll(scrollState)
     ) {
@@ -1233,6 +1234,7 @@ fun HomeComp(navController: NavController) {
                                 color = fontColor
                             )
                         }
+                        var graphColor= MaterialTheme.colorScheme.onSecondary
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -1245,7 +1247,7 @@ fun HomeComp(navController: NavController) {
                             ) {
 
                                 val barWidthPx = 1.dp.toPx()
-                                drawRect(Color.Green, style = Stroke(barWidthPx))
+                                drawRect(graphColor, style = Stroke(barWidthPx))
 
                                 //line vertical
 
@@ -1254,7 +1256,7 @@ fun HomeComp(navController: NavController) {
                                 repeat(verticalLines) { i ->
                                     val startX = verticalSize * (i + 1)
                                     drawLine(
-                                        Color.Green, start = Offset(startX, 0f),
+                                        graphColor, start = Offset(startX, 0f),
                                         end = Offset(startX, size.height),
                                         strokeWidth = barWidthPx
                                     )
@@ -1267,7 +1269,7 @@ fun HomeComp(navController: NavController) {
                                 repeat(horizontalLines) { i ->
                                     val startY = sectionSize * (i + 1)
                                     drawLine(
-                                        Color.Green,
+                                        graphColor,
                                         start = Offset(0f, startY),
                                         end = Offset(size.width, startY),
                                         strokeWidth = barWidthPx

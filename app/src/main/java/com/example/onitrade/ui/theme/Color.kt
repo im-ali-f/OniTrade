@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.Color
 
 
 val iconColor = Color(0xFFA3A5AC)
+val iconSelectedColor = Color(0xFF292E3F)
 val mainRedColor = Color(0xFFFF2C7B)
 val mainGreenColor = Color(0xFF2CFF8C)
 val mainBorderColor = Color(0xFFFFFFFF)
@@ -28,6 +29,8 @@ val mainfontDark = Color(0xFFFFFFFF)
 val selectedUpBTNDark = Color(0xFF4B5166)
 val unSelectedDownBTNDark = Color(0x7C4B5166)
 val graphBlockDark = Color(0xFF292D3B)
+val bottomBarDark = Color(0xFF323748)
+
 
 
 val mainBGCLight = Color(0xFFF4F6FC)
@@ -36,3 +39,5 @@ val mainfontLight = Color(0xFF292E3F)
 val selectedUpBTNLight = Color(0xFF4B5166)
 val unSelectedDownBTNLight = Color(0x8ADBE0F3)
 val graphBlockLight = Color(0xFFDBE0F3)
+val bottomBarLight = Color(0xFFEFF1F7)
+

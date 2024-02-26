@@ -27,6 +27,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
@@ -51,11 +55,16 @@ class MainActivity : ComponentActivity() {
                 val navState = rememberNavController()
                 //scaffold
                 var scaffoldState = rememberScaffoldState()
-
+                var selected = remember {
+                    mutableStateOf("homePage")
+                }
                     androidx.compose.material.Scaffold(
                         scaffoldState = scaffoldState,
                         topBar = {
                             TopBarComp(navController = navState )
+                        },
+                        bottomBar = {
+                            BottomBarComp(navController = navState,selected)
                         }
                     ) {
                         //inside scaffold
@@ -63,6 +72,7 @@ class MainActivity : ComponentActivity() {
                         NavHost(navController = navState, startDestination = "homePage") {
                             composable(route = "homePage") {
                                 HomeComp(navState)
+                                selected.value = "homePage"
                                 //DrawCubic()
                             }
                         }
