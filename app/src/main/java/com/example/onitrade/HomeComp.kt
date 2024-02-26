@@ -75,6 +75,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.onitrade.ui.theme.BTCColor
+import com.example.onitrade.ui.theme.BTCColorBrush
 import com.example.onitrade.ui.theme.ETHColor
 import com.example.onitrade.ui.theme.PPCColor
 import com.example.onitrade.ui.theme.iconColor
@@ -87,6 +88,8 @@ import com.example.onitrade.ui.theme.mainfontDark
 import com.example.onitrade.ui.theme.selectedUpBTNLight
 import com.example.onitrade.ui.theme.unSelectedDownBTNLight
 import kotlin.math.roundToInt
+import kotlin.random.Random
+import kotlin.random.nextULong
 
 @Composable
 fun HomeComp(navController: NavController) {
@@ -830,7 +833,7 @@ fun HomeComp(navController: NavController) {
         var BTNColor = MaterialTheme.colorScheme.secondary
         Box(modifier = Modifier
             .width(355.dp)
-            .height(360.dp)
+            .height(380.dp)
             .padding(start = 5.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
             .shadow()
             .drawWithCache {
@@ -1092,14 +1095,22 @@ fun HomeComp(navController: NavController) {
                                     ) {
                                         append("Last Price: ")
                                     }
-                                    withStyle(SpanStyle(fontWeight = FontWeight(500),
-                                        fontSize = 14.sp,
-                                        color = fontColor)) {
+                                    withStyle(
+                                        SpanStyle(
+                                            fontWeight = FontWeight(500),
+                                            fontSize = 14.sp,
+                                            color = fontColor
+                                        )
+                                    ) {
                                         append("11110")
                                     }
-                                    withStyle(SpanStyle(fontWeight = FontWeight(300),
-                                        fontSize = 12.sp,
-                                        color = fontColor)) {
+                                    withStyle(
+                                        SpanStyle(
+                                            fontWeight = FontWeight(300),
+                                            fontSize = 12.sp,
+                                            color = fontColor
+                                        )
+                                    ) {
                                         append(".23 USD")
                                     }
                                 }
@@ -1112,7 +1123,8 @@ fun HomeComp(navController: NavController) {
                         Row(
                             Modifier
                                 .padding(start = 20.dp)
-                                .fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                                .fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
+                        ) {
                             Text(
                                 text = buildAnnotatedString {
                                     withStyle(
@@ -1124,14 +1136,22 @@ fun HomeComp(navController: NavController) {
                                     ) {
                                         append("Low: ")
                                     }
-                                    withStyle(SpanStyle(fontWeight = FontWeight(500),
-                                        fontSize = 14.sp,
-                                        color = fontColor)) {
+                                    withStyle(
+                                        SpanStyle(
+                                            fontWeight = FontWeight(500),
+                                            fontSize = 14.sp,
+                                            color = fontColor
+                                        )
+                                    ) {
                                         append("853")
                                     }
-                                    withStyle(SpanStyle(fontWeight = FontWeight(300),
-                                        fontSize = 12.sp,
-                                        color = fontColor)) {
+                                    withStyle(
+                                        SpanStyle(
+                                            fontWeight = FontWeight(300),
+                                            fontSize = 12.sp,
+                                            color = fontColor
+                                        )
+                                    ) {
                                         append(".11 USD")
                                     }
                                 }
@@ -1149,14 +1169,22 @@ fun HomeComp(navController: NavController) {
                                     ) {
                                         append("High: ")
                                     }
-                                    withStyle(SpanStyle(fontWeight = FontWeight(500),
-                                        fontSize = 14.sp,
-                                        color = mainGreenColor)) {
+                                    withStyle(
+                                        SpanStyle(
+                                            fontWeight = FontWeight(500),
+                                            fontSize = 14.sp,
+                                            color = mainGreenColor
+                                        )
+                                    ) {
                                         append("1495")
                                     }
-                                    withStyle(SpanStyle(fontWeight = FontWeight(300),
-                                        fontSize = 12.sp,
-                                        color = mainGreenColor)) {
+                                    withStyle(
+                                        SpanStyle(
+                                            fontWeight = FontWeight(300),
+                                            fontSize = 12.sp,
+                                            color = mainGreenColor
+                                        )
+                                    ) {
                                         append(".86 USD")
                                     }
                                 }
@@ -1164,18 +1192,22 @@ fun HomeComp(navController: NavController) {
                             )
 
 
-
                         }
                     }
                 }
 
                 //sec 2.5 most important
-                Column (
+                Spacer(modifier = Modifier.height(10.dp))
+                Column(
                     Modifier
                         .fillMaxSize()
-                        .padding(start = 5.dp)){
-                    Row (Modifier.fillMaxWidth()){
-                        Column (Modifier.fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween){
+                        .padding(start = 5.dp)
+                ) {
+                    Row(Modifier.fillMaxWidth()) {
+                        Column(
+                            Modifier.fillMaxHeight(0.85f),
+                            verticalArrangement = Arrangement.SpaceBetween
+                        ) {
                             Text(
                                 text = "2000",
                                 fontWeight = FontWeight(300),
@@ -1201,38 +1233,43 @@ fun HomeComp(navController: NavController) {
                                 color = fontColor
                             )
                         }
-                        Box(modifier = Modifier
-                            .fillMaxSize()){
-                            Canvas(modifier = Modifier
-                                .padding(top = 8.dp, start = 8.dp, bottom = 8.dp, end = 0.dp)
-                                .fillMaxSize()){
-                                val barWidthPx= 1.dp.toPx()
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(0.85f)
+                        ) {
+                            Canvas(
+                                modifier = Modifier
+                                    .padding(top = 8.dp, start = 8.dp, bottom = 8.dp, end = 2.dp)
+                                    .fillMaxSize()
+                            ) {
+
+                                val barWidthPx = 1.dp.toPx()
                                 drawRect(Color.Green, style = Stroke(barWidthPx))
 
                                 //line vertical
 
                                 val verticalLines = 4
                                 val verticalSize = size.width / (verticalLines + 1)
-                                repeat(verticalLines){
-                                    i->
-                                    val startX = verticalSize*(i+1)
-                                    drawLine(Color.Green, start = Offset(startX,0f),
-                                        end =  Offset(startX,size.height),
+                                repeat(verticalLines) { i ->
+                                    val startX = verticalSize * (i + 1)
+                                    drawLine(
+                                        Color.Green, start = Offset(startX, 0f),
+                                        end = Offset(startX, size.height),
                                         strokeWidth = barWidthPx
                                     )
                                 }
 
                                 //line hotizontal
 
-                                val horizontalLines =2
-                                val sectionSize = size.height/(horizontalLines +1)
-                                repeat(horizontalLines){
-                                    i->
-                                    val startY = sectionSize * (i+1)
+                                val horizontalLines = 2
+                                val sectionSize = size.height / (horizontalLines + 1)
+                                repeat(horizontalLines) { i ->
+                                    val startY = sectionSize * (i + 1)
                                     drawLine(
                                         Color.Green,
-                                        start = Offset(0f,startY),
-                                        end = Offset(size.width,startY),
+                                        start = Offset(0f, startY),
+                                        end = Offset(size.width, startY),
                                         strokeWidth = barWidthPx
                                     )
                                 }
@@ -1240,31 +1277,123 @@ fun HomeComp(navController: NavController) {
                             }
 
                             //opacity decreaser
-                            var brushColor =MaterialTheme.colorScheme.primaryContainer
-                            Box(modifier = Modifier
-                                .fillMaxHeight()
-                                .fillMaxWidth(0.1f)
-                                .align(Alignment.CenterEnd)
-                                .background(
-                                    Brush.horizontalGradient(
-                                        listOf(
-                                            Color.Transparent,
-                                            brushColor,
-                                            brushColor
+                            var brushColor = MaterialTheme.colorScheme.primaryContainer
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxHeight()
+                                    .fillMaxWidth(0.1f)
+                                    .align(Alignment.CenterEnd)
+                                    .background(
+                                        Brush.horizontalGradient(
+                                            listOf(
+                                                Color.Transparent,
+                                                brushColor,
+                                                brushColor
+                                            )
                                         )
                                     )
-                                ))
+                            )
+                            fun generatePathGraph(size:Size):Path{
+                                var innerPath=Path()
+                                innerPath.moveTo(20f,size.height-18)
 
+                                //range beyn 25 -> 260
+                                val listOfY = listOf<Float>(50f,90f,190f,220f,230f,100f,50f,80f,230f,100f,50f,80f,90f,190f,170f,100f,50f,80f,90f,170f)
+                                var x =30f
+                                listOfY.forEach{
+                                    innerPath.lineTo(x,size.height-it)
+                                    x+=30f
+                                }
+
+
+                                return  innerPath
+                            }
+                            //path line
+                            Box(modifier = Modifier
+                                .fillMaxSize()
+                                .drawWithCache {
+                                    val path = generatePathGraph(size)
+                                    val filledPath = generatePathGraph(size)
+                                    filledPath.lineTo(size.width, size.height)
+                                    filledPath.lineTo(0f, size.height)
+
+
+                                    val graphBrush = Brush.verticalGradient(
+                                        startY = 0.8f,
+                                        colors = listOf(
+                                            BTCColorBrush,
+                                            Color.Transparent,
+
+                                            )
+                                    )
+                                    onDrawBehind {
+                                        drawPath(path = path, BTCColor, style = Stroke(3.dp.toPx()))
+                                        drawPath(
+                                            path = filledPath,
+                                            brush = graphBrush,
+                                            style = Fill
+                                        )
+                                    }
+                                })
+
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxHeight()
+                                    .fillMaxWidth(0.1f)
+                                    .align(Alignment.CenterEnd)
+                                    .background(
+                                        Brush.horizontalGradient(
+                                            listOf(
+                                                Color.Transparent,
+                                                brushColor
+                                            )
+                                        )
+                                    )
+                            )
 
                         }
+
+                    }
+
+                    Row (Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly){
+                        Text(
+                            text = "jun 20",
+                            fontWeight = FontWeight(400),
+                            fontSize = 11.sp,
+                            color = fontColor
+                        )
+
+                        Text(
+                            text = "jun 21",
+                            fontWeight = FontWeight(400),
+                            fontSize = 11.sp,
+                            color = fontColor
+                        )
+                        Text(
+                            text = "jun 22",
+                            fontWeight = FontWeight(400),
+                            fontSize = 11.sp,
+                            color = fontColor
+                        )
+                        Text(
+                            text = "jun 23",
+                            fontWeight = FontWeight(400),
+                            fontSize = 11.sp,
+                            color = fontColor
+                        )
+                        Text(
+                            text = "jun24",
+                            fontWeight = FontWeight(400),
+                            fontSize = 11.sp,
+                            color = fontColor
+                        )
                     }
 
                 }
 
-                //sec 2.6
+                //sec 2.6 extra part
 
                 //sec 2.x
-
 
 
             }

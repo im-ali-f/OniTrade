@@ -16,6 +16,7 @@ val mainSeperatorColor = Color(0x8DD8D8D8)
 
 
 val BTCColor = Color(0xFFE7953D)
+val BTCColorBrush = Color(0x8DE7953D)
 val PPCColor = Color(0xFF00B346)
 val ETHColor = Color(0xFF6E84FF)
 
