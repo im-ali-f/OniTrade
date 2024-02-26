@@ -23,7 +23,8 @@ private val DarkColorScheme = darkColorScheme(
     primaryContainer = secondaryDark,
     onSecondary = graphBlockDark,
     tertiary = mainfontDark,
-    background = bottomBarDark
+    background = bottomBarDark,
+    onBackground = iconSelectedDark,
 
 )
 
@@ -34,7 +35,8 @@ private val LightColorScheme = lightColorScheme(
     onPrimaryContainer = selectedUpBTNLight ,
     onSecondary = graphBlockLight,
     tertiary = mainfontLight,
-    background = bottomBarLight
+    background = bottomBarLight,
+    onBackground = iconSelectedLight,
 
 
 

@@ -22,7 +22,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.onitrade.ui.theme.iconColor
-import com.example.onitrade.ui.theme.iconSelectedColor
 
 @Composable
 fun BottomBarComp(navController: NavController, selected: MutableState<String>) {
@@ -34,8 +33,9 @@ fun BottomBarComp(navController: NavController, selected: MutableState<String>) 
                 .clip(RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp))
                 .background(MaterialTheme.colorScheme.background),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenlygi
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
+            var selectedColor = MaterialTheme.colorScheme.onBackground
             IconButton(
                 modifier = Modifier.size(32.dp),
                 onClick = {
@@ -46,7 +46,49 @@ fun BottomBarComp(navController: NavController, selected: MutableState<String>) 
                     modifier = Modifier.fillMaxSize(),
                     painter = painterResource(id = R.drawable.homepage),
                     contentDescription = null,
-                    tint = if (selected.value == "homePage") iconSelectedColor else iconColor
+                    tint = if (selected.value == "homePage") selectedColor else iconColor
+                )
+            }
+
+            IconButton(
+                modifier = Modifier.size(32.dp),
+                onClick = {
+                    navController.navigate("homePage")//change
+                    selected.value = "tradePage"
+                }) {
+                Icon(
+                    modifier = Modifier.fillMaxSize(),
+                    painter = painterResource(id = R.drawable.trade),
+                    contentDescription = null,
+                    tint = if (selected.value == "tradePage") selectedColor else iconColor
+                )
+            }
+
+            IconButton(
+                modifier = Modifier.size(32.dp),
+                onClick = {
+                    navController.navigate("homePage")//change
+                    selected.value = "walletPage"
+                }) {
+                Icon(
+                    modifier = Modifier.fillMaxSize(),
+                    painter = painterResource(id = R.drawable.wallet),
+                    contentDescription = null,
+                    tint = if (selected.value == "walletPage") selectedColor else iconColor
+                )
+            }
+
+            IconButton(
+                modifier = Modifier.size(32.dp),
+                onClick = {
+                    navController.navigate("homePage")//change
+                    selected.value = "bookmarkPage"
+                }) {
+                Icon(
+                    modifier = Modifier.fillMaxSize(),
+                    painter = painterResource(id = R.drawable.bookmark),
+                    contentDescription = null,
+                    tint = if (selected.value == "bookmarkPage") selectedColor else iconColor
                 )
             }
 
