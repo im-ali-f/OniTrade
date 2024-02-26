@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -50,6 +51,7 @@ import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.Path
@@ -1168,7 +1170,96 @@ fun HomeComp(navController: NavController) {
                 }
 
                 //sec 2.5 most important
+                Column (
+                    Modifier
+                        .fillMaxSize()
+                        .padding(start = 5.dp)){
+                    Row (Modifier.fillMaxWidth()){
+                        Column (Modifier.fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween){
+                            Text(
+                                text = "2000",
+                                fontWeight = FontWeight(300),
+                                fontSize = 10.sp,
+                                color = fontColor
+                            )
+                            Text(
+                                text = "1500",
+                                fontWeight = FontWeight(300),
+                                fontSize = 10.sp,
+                                color = fontColor
+                            )
+                            Text(
+                                text = "1000",
+                                fontWeight = FontWeight(300),
+                                fontSize = 10.sp,
+                                color = fontColor
+                            )
+                            Text(
+                                text = "800",
+                                fontWeight = FontWeight(300),
+                                fontSize = 10.sp,
+                                color = fontColor
+                            )
+                        }
+                        Box(modifier = Modifier
+                            .fillMaxSize()){
+                            Canvas(modifier = Modifier
+                                .padding(top = 8.dp, start = 8.dp, bottom = 8.dp, end = 0.dp)
+                                .fillMaxSize()){
+                                val barWidthPx= 1.dp.toPx()
+                                drawRect(Color.Green, style = Stroke(barWidthPx))
 
+                                //line vertical
+
+                                val verticalLines = 4
+                                val verticalSize = size.width / (verticalLines + 1)
+                                repeat(verticalLines){
+                                    i->
+                                    val startX = verticalSize*(i+1)
+                                    drawLine(Color.Green, start = Offset(startX,0f),
+                                        end =  Offset(startX,size.height),
+                                        strokeWidth = barWidthPx
+                                    )
+                                }
+
+                                //line hotizontal
+
+                                val horizontalLines =2
+                                val sectionSize = size.height/(horizontalLines +1)
+                                repeat(horizontalLines){
+                                    i->
+                                    val startY = sectionSize * (i+1)
+                                    drawLine(
+                                        Color.Green,
+                                        start = Offset(0f,startY),
+                                        end = Offset(size.width,startY),
+                                        strokeWidth = barWidthPx
+                                    )
+                                }
+
+                            }
+
+                            //opacity decreaser
+                            var brushColor =MaterialTheme.colorScheme.primaryContainer
+                            Box(modifier = Modifier
+                                .fillMaxHeight()
+                                .fillMaxWidth(0.1f)
+                                .align(Alignment.CenterEnd)
+                                .background(
+                                    Brush.horizontalGradient(
+                                        listOf(
+                                            Color.Transparent,
+                                            brushColor,
+                                            brushColor
+                                        )
+                                    )
+                                ))
+
+
+                        }
+                    }
+
+                }
 
                 //sec 2.6
 
