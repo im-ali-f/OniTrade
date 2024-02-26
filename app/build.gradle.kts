@@ -73,4 +73,7 @@ dependencies {
     //scaffold
     implementation("androidx.compose.material:material:1.6.1")
 
+    //custom shape
+    implementation("androidx.graphics:graphics-shapes:1.0.0-alpha05")
+
 }

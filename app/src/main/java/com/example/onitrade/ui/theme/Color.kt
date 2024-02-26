@@ -11,8 +11,7 @@ val mainGreenColor = Color(0xFF2CFF8C)
 val mainBorderColor = Color(0xFFFFFFFF)
 val mainYellowColor = Color(0xFFFFC90E)
 val mainFontColorStatic = Color(0xFFFFFFFF)
-
-
+val mainSeperatorColor = Color(0x8DD8D8D8)
 
 
 
@@ -26,7 +25,7 @@ val mainBGCDark = Color(0xFF292E3F)
 val secondaryDark = Color(0xFF323748)
 val mainfontDark = Color(0xFFFFFFFF)
 val selectedUpBTNDark = Color(0xFF4B5166)
-val unSelectedDownBTNDark = Color(0xFF4B5166)
+val unSelectedDownBTNDark = Color(0x6F4B5166)
 val graphBlockDark = Color(0xFF292D3B)
 
 
@@ -34,5 +33,5 @@ val mainBGCLight = Color(0xFFF4F6FC)
 val secondaryLight = Color(0xFFF7F9FF)
 val mainfontLight = Color(0xFF292E3F)
 val selectedUpBTNLight = Color(0xFF4B5166)
-val unSelectedDownBTNLight = Color(0xFFDBE0F3)
+val unSelectedDownBTNLight = Color(0x7ADBE0F3)
 val graphBlockLight = Color(0xFFDBE0F3)

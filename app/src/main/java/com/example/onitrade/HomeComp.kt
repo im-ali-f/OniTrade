@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Shapes
 import androidx.compose.material.Slider
 import androidx.compose.material.icons.Icons
@@ -72,9 +73,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.onitrade.ui.theme.BTCColor
+import com.example.onitrade.ui.theme.ETHColor
+import com.example.onitrade.ui.theme.PPCColor
 import com.example.onitrade.ui.theme.iconColor
 import com.example.onitrade.ui.theme.mainFontColorStatic
 import com.example.onitrade.ui.theme.mainRedColor
+import com.example.onitrade.ui.theme.mainSeperatorColor
+import com.example.onitrade.ui.theme.mainYellowColor
 import com.example.onitrade.ui.theme.mainfontDark
 import com.example.onitrade.ui.theme.selectedUpBTNLight
 import com.example.onitrade.ui.theme.unSelectedDownBTNLight
@@ -82,7 +87,7 @@ import kotlin.math.roundToInt
 
 @Composable
 fun HomeComp(navController: NavController) {
-    val scrollState= rememberScrollState()
+    val scrollState = rememberScrollState()
     Column(
         Modifier
             .fillMaxSize()
@@ -119,6 +124,7 @@ fun HomeComp(navController: NavController) {
 
         var fontColor = MaterialTheme.colorScheme.tertiary
         val bgcColor = MaterialTheme.colorScheme.primaryContainer
+
         //1 bar mikhaym
         fun Modifier.shadow(
             color: Color = Color.Black,
@@ -722,14 +728,14 @@ fun HomeComp(navController: NavController) {
             //box koli
 
 
-                Box(
-                    modifier = Modifier
-                        .size(if (turn == 1) 30.dp else 7.dp, 7.dp)
-                        .shadow(3.dp, RoundedCornerShape(100))
-                        .clip(RoundedCornerShape(100))
-                        .background(MaterialTheme.colorScheme.primaryContainer)
+            Box(
+                modifier = Modifier
+                    .size(if (turn == 1) 30.dp else 7.dp, 7.dp)
+                    .shadow(3.dp, RoundedCornerShape(100))
+                    .clip(RoundedCornerShape(100))
+                    .background(MaterialTheme.colorScheme.primaryContainer)
 
-                )
+            )
 
             Spacer(modifier = Modifier.width(5.dp))
             Box(
@@ -774,9 +780,53 @@ fun HomeComp(navController: NavController) {
         //sec 2
 
 
+        fun genPathBTN(size: Size): Path {
+            val innerPath = Path()
+            innerPath.cubicTo(
+                x1 = 0f,
+                y1 = 0f,
+                x2 = size.width / 2,
+                y2 = -15f,
+                x3 = size.width,
+                y3 = 0f
+            )
+            innerPath.cubicTo(
+                x1 = size.width,
+                y1 = 0f,
+
+                x2 = size.width + 15,
+                y2 = size.height / 2,
+
+                x3 = size.width,
+                y3 = size.height
+            )
+            innerPath.cubicTo(
+                x1 = size.width,
+                y1 = size.height,
+                x2 = size.width / 2,
+                y2 = size.height + 15,
+                x3 = 0f,
+                y3 = size.height
+            )
+            innerPath.cubicTo(
+                x1 = 0f,
+                y1 = size.height,
+
+                x2 = 0f - 15,
+                y2 = size.height / 2,
+
+                x3 = 0f,
+                y3 = 0f
+            )
+            innerPath.close()
+
+            return innerPath
+
+        }
+        var BTNColor= MaterialTheme.colorScheme.secondary
         Box(modifier = Modifier
             .width(355.dp)
-            .height(400.dp)
+            .height(310.dp)
             .padding(start = 5.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
             .shadow()
             .drawWithCache {
@@ -791,18 +841,237 @@ fun HomeComp(navController: NavController) {
         {
 
             //inner topsec
-            Row (
-                Modifier
-                    .fillMaxWidth()
-                    .padding(10.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween){
-                Row (){
-                    Text(text = "In Order: ", fontWeight = FontWeight(300), fontSize = 14.sp, color = fontColor)
-                    Text(text = " 256.45 BTC", fontWeight = FontWeight(700), fontSize = 14.sp, color = fontColor)
+
+
+            Column(Modifier.fillMaxWidth()) {
+
+                //sec 2.1
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, top = 15.dp, end = 20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(Modifier.padding()) {
+                        Text(
+                            text = "In Order: ",
+                            fontWeight = FontWeight(300),
+                            fontSize = 14.sp,
+                            color = fontColor
+                        )
+                        Text(
+                            text = " 256.45 BTC",
+                            fontWeight = FontWeight(700),
+                            fontSize = 14.sp,
+                            color = fontColor
+                        )
+
+                    }
+                    LinearProgressIndicator(
+                        progress = 0.45f, modifier = Modifier
+                            .size(100.dp, 6.dp)
+                            .clip(
+                                RoundedCornerShape(100)
+                            ), backgroundColor = Color(0xFF979797),
+                        color = mainYellowColor
+                    )
 
                 }
-                //inja bayad ye status bar biad
+
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, top = 15.dp, end = 20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "Daily Limit: ",
+                            fontWeight = FontWeight(300),
+                            fontSize = 14.sp,
+                            color = fontColor
+                        )
+                        Text(
+                            text = " $75,000",
+                            fontWeight = FontWeight(700),
+                            fontSize = 14.sp,
+                            color = fontColor
+                        )
+
+                        Spacer(modifier = Modifier.width(10.dp))
+                        IconButton(onClick = { /*TODO*/ }, modifier = Modifier
+
+                            .drawWithCache {
+                                onDrawBehind {
+                                    val path = genPathBTN(size)
+                                    drawPath(path, BTNColor, style = Fill)
+                                }
+                            }
+                            .size(25.dp)
+
+                        ) {
+                            Icon(
+                                modifier = Modifier.fillMaxSize(),
+                                painter = painterResource(id = R.drawable.arrowup),
+                                contentDescription = null,
+                                tint = Color.White
+                            )
+
+                        }
+
+
+                    }
+                    LinearProgressIndicator(
+                        progress = 0.8f, modifier = Modifier
+                            .size(100.dp, 6.dp)
+                            .clip(
+                                RoundedCornerShape(100)
+                            ), backgroundColor = Color(0xFF979797),
+                        color = mainRedColor
+                    )
+
+                }
+
+
+                //sec 2.2
+                Spacer(modifier = Modifier.height(15.dp))
+                Box(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(0.7.dp)
+                    .background(mainSeperatorColor))
+                //sec 2.3
+                Spacer(modifier = Modifier.height(15.dp))
+                Row (
+                    Modifier
+                        .fillMaxWidth(0.6f)
+                        .padding(start = 15.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween){
+
+                    var selected by remember {
+                        mutableStateOf(1)
+                    }
+                    //btc
+                    IconButton(onClick = { selected = 1 }, modifier = Modifier
+
+                        .drawWithCache {
+                            onDrawBehind {
+                                val path = genPathBTN(size)
+                                drawPath(
+                                    path,
+                                    if (selected == 1) BTCColor else BTNColor,
+                                    style = Fill
+                                )
+                            }
+                        }
+                        .size(30.dp)
+
+                    ) {
+                        Icon(
+                            modifier = Modifier.fillMaxSize(0.8f),
+                            painter = painterResource(id = R.drawable.btc),
+                            contentDescription = null,
+                            tint = Color.White
+                        )
+
+                    }
+
+                    //leaf
+                    IconButton(onClick = { selected = 2 }, modifier = Modifier
+
+                        .drawWithCache {
+                            onDrawBehind {
+                                val path = genPathBTN(size)
+                                drawPath(
+                                    path,
+                                    if (selected == 2) PPCColor else BTNColor,
+                                    style = Fill
+                                )
+                            }
+                        }
+                        .size(30.dp)
+
+                    ) {
+                        Icon(
+                            modifier = Modifier.fillMaxSize(0.8f),
+                            painter = painterResource(id = R.drawable.leaf),
+                            contentDescription = null,
+                            tint = Color.Green
+                        )
+
+                    }
+
+                    //eter
+                    IconButton(onClick = { selected = 3 }, modifier = Modifier
+
+                        .drawWithCache {
+                            onDrawBehind {
+                                val path = genPathBTN(size)
+                                drawPath(
+                                    path,
+                                    if (selected == 3) ETHColor else BTNColor,
+                                    style = Fill
+                                )
+                            }
+                        }
+                        .size(30.dp)
+
+                    ) {
+                        Icon(
+                            modifier = Modifier.fillMaxSize(0.8f),
+                            painter = painterResource(id = R.drawable.eter),
+                            contentDescription = null,
+                            tint = Color.Blue
+                        )
+
+                    }
+
+
+                    IconButton(onClick = { selected = 3 }, modifier = Modifier
+
+                        .drawWithCache {
+                            onDrawBehind {
+                                val path = genPathBTN(size)
+                                val stroke = Stroke(width = 3f,
+                                    pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
+                                )
+
+                                drawPath(
+                                    path,
+                                    BTNColor,
+                                    style = Fill
+                                )
+                                drawPath(
+                                    path,
+                                    Color.White,
+                                    style = stroke
+                                )
+                            }
+                        }
+                        .size(30.dp)
+
+                    ) {
+                        Icon(
+                            modifier = Modifier.fillMaxSize(0.8f),
+                            imageVector = Icons.Default.Add,
+                            contentDescription = null,
+                            tint = Color.White
+                        )
+
+                    }
+
+
+                }
+
+                //sec2.4
+
+
+                //sec 2.x
+
+
 
             }
+
 
             //end inner
 
