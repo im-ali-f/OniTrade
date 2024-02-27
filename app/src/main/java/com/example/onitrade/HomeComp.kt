@@ -34,6 +34,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -63,6 +64,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -81,6 +83,7 @@ import com.example.onitrade.ui.theme.PPCColor
 import com.example.onitrade.ui.theme.iconColor
 import com.example.onitrade.ui.theme.mainFontColorStatic
 import com.example.onitrade.ui.theme.mainGreenColor
+import com.example.onitrade.ui.theme.mainProtfolioColor
 import com.example.onitrade.ui.theme.mainRedColor
 import com.example.onitrade.ui.theme.mainSeperatorColor
 import com.example.onitrade.ui.theme.mainYellowColor
@@ -962,6 +965,7 @@ fun HomeComp(navController: NavController) {
 
                         }
                         LinearProgressIndicator(
+                            strokeCap = StrokeCap.Square ,
                             progress = 0.8f, modifier = Modifier
                                 .size(100.dp, 6.dp)
                                 .clip(
@@ -1471,6 +1475,151 @@ fun HomeComp(navController: NavController) {
 
             //sec 3
 
+            Box(modifier = Modifier
+                .fillMaxWidth(0.95f)
+                .height(230.dp)
+                .padding(top = 10.dp, bottom = 10.dp, start = 2.dp, end = 2.dp)
+                .shadow()
+                .drawWithCache {
+                    onDrawBehind {
+                        val path = genPath(size)
+
+                        drawPath(path, bgcColor, style = Fill)
+                    }
+                }
+                .align(Alignment.CenterHorizontally)
+            )
+            {
+
+                Column {
+                Row (modifier= Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, top = 10.dp)){
+                    Text(text = "Portfolio",
+                        fontWeight = FontWeight(600),
+                        fontSize = 15.sp,
+                        color = fontColor)
+                }
+                Row (Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly){
+                    Box(modifier = Modifier, contentAlignment = Alignment.Center){
+                        Canvas(modifier = Modifier.size(115.dp) ){
+                            drawCircle(
+                                color = mainProtfolioColor,
+                                alpha = 1f,
+                                style = Stroke(
+                                    width = 10f
+                                )
+                            )
+                        }
+                        CircularSlider(modifier = Modifier.size(120.dp), thumbColor = BTNColor, place = 400)
+                        CircularSlider(modifier = Modifier.size(120.dp),thumbColor = BTCColor , place = 320)
+                        CircularSlider(modifier = Modifier.size(120.dp),thumbColor = ETHColor, place = 140)
+                        CircularSlider(modifier = Modifier.size(120.dp),thumbColor = BTCColor, place = 90)
+                        CircularSlider(modifier = Modifier.size(120.dp),thumbColor = PPCColor, place = 340)
+                        CircularSlider(modifier = Modifier.size(120.dp),thumbColor = BTCColor, place = 200)
+                        CircularSlider(modifier = Modifier.size(120.dp),thumbColor = ETHColor, place = 240)
+
+
+
+                    }
+                    Column {
+                        Text(text = buildAnnotatedString {
+                            withStyle(
+                                SpanStyle(
+                                    fontWeight = FontWeight(400),
+                                    fontSize = 17.sp,
+                                    color = BTCColor
+                                )
+                            ){
+                                append("BTC = ")
+                            }
+
+                            withStyle(
+                                SpanStyle(
+                                    fontWeight = FontWeight(400),
+                                    fontSize = 17.sp,
+                                    color = Color.White
+                                )
+                            ){
+                                append("0.087654")
+                            }
+                        })
+
+
+
+                        Text(text = buildAnnotatedString {
+                            withStyle(
+                                SpanStyle(
+                                    fontWeight = FontWeight(400),
+                                    fontSize = 17.sp,
+                                    color = ETHColor
+                                )
+                            ){
+                                append("ETH = ")
+                            }
+
+                            withStyle(
+                                SpanStyle(
+                                    fontWeight = FontWeight(400),
+                                    fontSize = 17.sp,
+                                    color = Color.White
+                                )
+                            ){
+                                append("1.456543")
+                            }
+                        })
+
+                        Text(text = buildAnnotatedString {
+                            withStyle(
+                                SpanStyle(
+                                    fontWeight = FontWeight(400),
+                                    fontSize = 17.sp,
+                                    color = PPCColor
+                                )
+                            ){
+                                append("PPC = ")
+                            }
+
+                            withStyle(
+                                SpanStyle(
+                                    fontWeight = FontWeight(400),
+                                    fontSize = 17.sp,
+                                    color = Color.White
+                                )
+                            ){
+                                append("200.13342")
+                            }
+                        })
+
+                        Text(text = buildAnnotatedString {
+                            withStyle(
+                                SpanStyle(
+                                    fontWeight = FontWeight(400),
+                                    fontSize = 17.sp,
+                                    color = BTNColor
+                                )
+                            ){
+                                append("Others = ")
+                            }
+
+                            withStyle(
+                                SpanStyle(
+                                    fontWeight = FontWeight(400),
+                                    fontSize = 17.sp,
+                                    color = Color.White
+                                )
+                            ){
+                                append("0.11032")
+                            }
+                        })
+                    }
+                }
+
+
+                }
+
+            }
+            Spacer(modifier = Modifier.width(20.dp))
             //sec 4
 
             //sec n
@@ -1607,7 +1756,7 @@ fun HomeComp(navController: NavController) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(start = 15.dp , end = 15.dp, top = 20.dp, bottom = 10.dp)
+                            .padding(start = 15.dp, end = 15.dp, top = 20.dp, bottom = 10.dp)
                     ) {
                         //row1
                         Row(
@@ -1788,7 +1937,7 @@ fun HomeComp(navController: NavController) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(start = 15.dp , end = 15.dp, top = 20.dp, bottom = 10.dp)
+                            .padding(start = 15.dp, end = 15.dp, top = 20.dp, bottom = 10.dp)
                     ) {
                         //row1
                         Row(
@@ -1969,7 +2118,7 @@ fun HomeComp(navController: NavController) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(start = 15.dp , end = 15.dp, top = 20.dp, bottom = 10.dp)
+                            .padding(start = 15.dp, end = 15.dp, top = 20.dp, bottom = 10.dp)
                     ) {
                         //row1
                         Row(
@@ -2291,6 +2440,7 @@ fun HomeComp(navController: NavController) {
 
                         }
                         LinearProgressIndicator(
+
                             progress = 0.45f, modifier = Modifier
                                 .size(110.dp, 8.dp)
                                 .clip(
