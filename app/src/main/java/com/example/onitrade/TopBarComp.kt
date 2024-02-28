@@ -5,11 +5,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.outlined.KeyboardArrowLeft
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -31,7 +34,7 @@ import com.example.onitrade.ui.theme.iconColor
 import com.example.onitrade.ui.theme.mainYellowColor
 
 @Composable
-fun TopBarComp(navController: NavController) {
+fun TopBarComp(navController: NavController,showBack:Boolean,showSetting:Boolean) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .background(MaterialTheme.colorScheme.primary)
@@ -55,13 +58,45 @@ fun TopBarComp(navController: NavController) {
         }
 
 
-        Box(modifier = Modifier.align(Alignment.CenterEnd)){
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Outlined.Settings, contentDescription = null, tint = iconColor)
+            Box(modifier = Modifier.align(Alignment.CenterEnd)) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    if(showSetting) {
+                    IconButton(onClick = { navController.navigate("settingPage") }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Settings,
+                            contentDescription = null,
+                            tint = iconColor
+                        )
+                    }
+                    }
+                    Box(
+                        modifier = Modifier.size(45.dp).clip(RoundedCornerShape(100))
+                            .background(Color.LightGray).clickable { })
                 }
-                Box(modifier = Modifier.size(45.dp).clip(RoundedCornerShape(100)).background(Color.LightGray).clickable {  })
             }
-        }
+
+
+
+            Box(modifier = Modifier.align(Alignment.CenterStart)) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    if(showBack) {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            modifier = Modifier.fillMaxSize(),
+                            imageVector = Icons.Filled.KeyboardArrowLeft,
+                            contentDescription = null,
+                            tint = iconColor
+                        )
+                    }
+                    }
+                }
+            }
+
     }
 }

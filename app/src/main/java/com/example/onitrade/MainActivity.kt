@@ -51,6 +51,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            var showBottomBar by remember {
+                mutableStateOf(true)
+            }
+            var showSetting by remember {
+                mutableStateOf(true)
+            }
+            var showBack by remember {
+                mutableStateOf(true)
+            }
             var darkTheme = isSystemInDarkTheme()
             OniTradeTheme(darkTheme = darkTheme) {
                 val screenWidth = LocalConfiguration.current.screenWidthDp
@@ -65,15 +74,15 @@ class MainActivity : ComponentActivity() {
                     androidx.compose.material.Scaffold(
                         scaffoldState = scaffoldState,
                         topBar = {
-                            TopBarComp(navController = navState )
+                            TopBarComp(navController = navState, showBack, showSetting )
                         },
                         bottomBar = {
-                            BottomBarComp(navController = navState,selected)
+                            BottomBarComp(navController = navState,selected,showBottomBar)
                         }
                     ) {
                         //inside scaffold
 
-                        NavHost(navController = navState, startDestination = "tradePage") {
+                        NavHost(navController = navState, startDestination = "settingPage") {
                             composable(route = "homePage") {
                                 if(screenWidth<400) {
                                     HomeComp(navState)
@@ -81,13 +90,28 @@ class MainActivity : ComponentActivity() {
                                 else{
                                     HomeComp2(navState)
                                 }
+                                showBottomBar = true
+                                showBack = false
+                                showSetting = true
                                 selected.value = "homePage"
                                 //DrawCubic()
                             }
 
                             composable(route = "tradePage") {
                                 TradeComp(navState)
+                                showBottomBar = true
+                                showBack = false
+                                showSetting = true
                                 selected.value = "tradePage"
+                                //DrawCubic()
+                            }
+
+                            composable(route = "settingPage") {
+                                SettingComp(navState)
+                                showBottomBar = false
+                                showBack = true
+                                showSetting = false
+                                selected.value = "settingPage"
                                 //DrawCubic()
                             }
                         }

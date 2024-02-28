@@ -25,11 +25,11 @@ import androidx.navigation.NavController
 import com.example.onitrade.ui.theme.iconColor
 
 @Composable
-fun BottomBarComp(navController: NavController, selected: MutableState<String>) {
-
+fun BottomBarComp(navController: NavController, selected: MutableState<String>,show:Boolean) {
+if(show) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val screenHeight = LocalConfiguration.current.screenHeightDp
-    if(screenWidth<400) {
+    if (screenWidth < 400) {
         Column(Modifier.background(MaterialTheme.colorScheme.primary)) {
             Row(
                 modifier = Modifier
@@ -58,7 +58,7 @@ fun BottomBarComp(navController: NavController, selected: MutableState<String>) 
                 IconButton(
                     modifier = Modifier.size(32.dp),
                     onClick = {
-                        navController.navigate("homePage")//change
+                        navController.navigate("tradePage")//change
                         selected.value = "tradePage"
                     }) {
                     Icon(
@@ -100,7 +100,7 @@ fun BottomBarComp(navController: NavController, selected: MutableState<String>) 
             }
         }
     }
-    if(screenWidth>400) {
+    if (screenWidth > 400) {
         Column(Modifier.background(MaterialTheme.colorScheme.primary)) {
             Row(
                 modifier = Modifier
@@ -129,7 +129,7 @@ fun BottomBarComp(navController: NavController, selected: MutableState<String>) 
                 IconButton(
                     modifier = Modifier.size(38.dp),
                     onClick = {
-                        navController.navigate("homePage")//change
+                        navController.navigate("tradePage")//change
                         selected.value = "tradePage"
                     }) {
                     Icon(
@@ -171,4 +171,5 @@ fun BottomBarComp(navController: NavController, selected: MutableState<String>) 
             }
         }
     }
+}
 }
