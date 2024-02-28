@@ -25,6 +25,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -53,6 +54,7 @@ import com.example.onitrade.ui.theme.ETHColor
 import com.example.onitrade.ui.theme.PPCColor
 import com.example.onitrade.ui.theme.XLMColor
 import com.example.onitrade.ui.theme.mainSeperatorColor
+import com.example.onitrade.ui.theme.mainYellowColor
 
 @Composable
 fun TradeComp(navController: NavController) {
@@ -289,8 +291,7 @@ fun TradeComp(navController: NavController) {
 
         var fontColor = MaterialTheme.colorScheme.tertiary
         val bgcColor = MaterialTheme.colorScheme.primaryContainer
-        tradeInfosList.forEach {
-            token ->
+        tradeInfosList.forEach { token ->
 
             //loop from here
             Spacer(modifier = Modifier.height(15.dp))
@@ -316,8 +317,10 @@ fun TradeComp(navController: NavController) {
                 .shadow(end = if (isSelected) 30 else 0)
                 .background(bgcColor)
                 .clickable { isSelected = !isSelected }
-            Column(modifier = if(isSelected) modifSelected else modifUnSelected,
-                horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(
+                modifier = if (isSelected) modifSelected else modifUnSelected,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
                 Row(
                     Modifier
@@ -335,28 +338,47 @@ fun TradeComp(navController: NavController) {
                             .background(Color.Red), contentAlignment = Alignment.Center
                     ) {
                         val iconColor = token["color"] as Color
-                        Box(modifier = Modifier
-                            .size(50.dp)
-                            .clip(RoundedCornerShape(100))
-                            .background(iconColor)
-                            .border(2.dp, Color.White, RoundedCornerShape(100)), contentAlignment = Alignment.Center) {
+                        Box(
+                            modifier = Modifier
+                                .size(50.dp)
+                                .clip(RoundedCornerShape(100))
+                                .background(iconColor)
+                                .border(2.dp, Color.White, RoundedCornerShape(100)),
+                            contentAlignment = Alignment.Center
+                        ) {
                             val icon = token["icon"] as Int
 
-                            Icon(modifier = Modifier.fillMaxSize(0.8f),painter = painterResource(id = icon), contentDescription =null , tint = Color.White )
+                            Icon(
+                                modifier = Modifier.fillMaxSize(0.8f),
+                                painter = painterResource(id = icon),
+                                contentDescription = null,
+                                tint = Color.White
+                            )
                         }
 
-                        Box(modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color.Transparent), contentAlignment = Alignment.BottomEnd) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(Color.Transparent),
+                            contentAlignment = Alignment.BottomEnd
+                        ) {
                             val pricerColor = token["pricerColor"] as Color
-                            Box(modifier = Modifier
-                                .size(35.dp)
-                                .clip(RoundedCornerShape(100))
-                                .background(pricerColor)
-                                .border(2.dp, Color.White, RoundedCornerShape(100)), contentAlignment = Alignment.Center) {
+                            Box(
+                                modifier = Modifier
+                                    .size(35.dp)
+                                    .clip(RoundedCornerShape(100))
+                                    .background(pricerColor)
+                                    .border(2.dp, Color.White, RoundedCornerShape(100)),
+                                contentAlignment = Alignment.Center
+                            ) {
                                 val icon = token["pricerIcon"] as Int
 
-                                Icon(modifier = Modifier.fillMaxSize(0.6f),painter = painterResource(id = icon), contentDescription =null , tint = Color.White )
+                                Icon(
+                                    modifier = Modifier.fillMaxSize(0.6f),
+                                    painter = painterResource(id = icon),
+                                    contentDescription = null,
+                                    tint = Color.White
+                                )
                             }
 
                         }
@@ -366,15 +388,42 @@ fun TradeComp(navController: NavController) {
                     Column(
                         Modifier
                             .fillMaxSize()
-                            .padding(start = 10.dp, end = 10.dp), verticalArrangement = Arrangement.SpaceAround , horizontalAlignment = Alignment.CenterHorizontally
+                            .padding(start = 10.dp, end = 10.dp),
+                        verticalArrangement = Arrangement.SpaceAround,
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Row (modifier = Modifier.fillMaxWidth()){
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
                             val tokenName = token["token"] as String
                             val pricerName = token["pricer"] as String
-                            Text(text = "$tokenName/$pricerName"
-                                ,fontSize = 15.sp,
+                            Text(
+                                text = "$tokenName/$pricerName", fontSize = 15.sp,
                                 fontWeight = FontWeight(600),
-                                color = fontColor)
+                                color = fontColor
+                            )
+                            val progressFloat = token["percentFloat"] as Float
+                            val progressInt = token["percentInt"] as Int
+                            val iconColor = token["color"] as Color
+                            Row (Modifier.fillMaxWidth(0.9f), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly){
+                                LinearProgressIndicator(
+                                    progress = progressFloat,
+                                    modifier = Modifier.size(90.dp, 5.dp)
+                                        .clip(
+                                            RoundedCornerShape(100)
+                                        )
+                                    ,
+                                    color = iconColor
+
+                                )
+                                Text(
+                                    text = "$progressInt%", fontSize = 13.sp,
+                                    fontWeight = FontWeight(400),
+                                    color = iconColor
+                                )
+
+                            }
                         }
                     }
 
@@ -407,12 +456,12 @@ fun TradeComp(navController: NavController) {
         }
 
 
-            //endtest
+        //endtest
 
-            //section +1 ?
+        //section +1 ?
 
 
-            Spacer(modifier = Modifier.height(50.dp))
-            //end main inner
-        }
+        Spacer(modifier = Modifier.height(50.dp))
+        //end main inner
     }
+}
