@@ -37,6 +37,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -52,6 +53,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             var darkTheme = isSystemInDarkTheme()
             OniTradeTheme(darkTheme = darkTheme) {
+                val screenWidth = LocalConfiguration.current.screenWidthDp
+                val screenHeight = LocalConfiguration.current.screenHeightDp
+
                 val navState = rememberNavController()
                 //scaffold
                 var scaffoldState = rememberScaffoldState()
@@ -71,7 +75,12 @@ class MainActivity : ComponentActivity() {
 
                         NavHost(navController = navState, startDestination = "homePage") {
                             composable(route = "homePage") {
-                                HomeComp(navState)
+                                if(screenWidth<400) {
+                                    HomeComp(navState)
+                                }
+                                else{
+                                    HomeComp2(navState)
+                                }
                                 selected.value = "homePage"
                                 //DrawCubic()
                             }

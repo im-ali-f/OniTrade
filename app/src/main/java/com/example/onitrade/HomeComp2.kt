@@ -1,5 +1,6 @@
 package com.example.onitrade
 
+
 import android.graphics.BlurMaskFilter
 import android.graphics.Typeface.NORMAL
 import android.graphics.drawable.ShapeDrawable
@@ -93,15 +94,14 @@ import com.example.onitrade.ui.theme.unSelectedDownBTNLight
 import kotlin.math.roundToInt
 import kotlin.random.Random
 import kotlin.random.nextULong
-
 @Composable
-fun HomeComp(navController: NavController) {
+fun HomeComp2(navController: NavController) {
 
         val scrollState = rememberScrollState()
         Column(
             Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.91f)
+                .fillMaxHeight(0.94f)
                 .background(MaterialTheme.colorScheme.primary)
                 .verticalScroll(scrollState)
         ) {
@@ -208,8 +208,8 @@ fun HomeComp(navController: NavController) {
 
 
                 Box(modifier = Modifier
-                    .width(355.dp)
-                    .height(191.dp)
+                    .width(380.dp)
+                    .height(210.dp)
                     .padding(start = 5.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
                     .shadow()
                     .drawWithCache {
@@ -226,7 +226,7 @@ fun HomeComp(navController: NavController) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(10.dp)
+                            .padding(start = 15.dp, end = 15.dp, top = 20.dp, bottom = 10.dp)
                     ) {
                         //row1
                         Row(
@@ -235,7 +235,7 @@ fun HomeComp(navController: NavController) {
                         ) {
                             Text(
                                 text = "Total Balance",
-                                fontSize = 11.5.sp,
+                                fontSize = 13.5.sp,
                                 fontWeight = FontWeight(700),
                                 color = fontColor
                             )
@@ -252,7 +252,7 @@ fun HomeComp(navController: NavController) {
                             Text(text = buildAnnotatedString {
                                 withStyle(
                                     SpanStyle(
-                                        fontSize = 27.sp,
+                                        fontSize = 29.sp,
                                         fontWeight = FontWeight(500),
                                         color = fontColor
                                     )
@@ -262,7 +262,7 @@ fun HomeComp(navController: NavController) {
 
                                 withStyle(
                                     SpanStyle(
-                                        fontSize = 27.sp,
+                                        fontSize = 29.sp,
                                         fontWeight = FontWeight(250),
                                         color = fontColor
                                     )
@@ -272,7 +272,7 @@ fun HomeComp(navController: NavController) {
 
                                 withStyle(
                                     SpanStyle(
-                                        fontSize = 27.sp,
+                                        fontSize = 29.sp,
                                         fontWeight = FontWeight(250),
                                         color = fontColor
                                     )
@@ -289,7 +289,7 @@ fun HomeComp(navController: NavController) {
                         ) {
                             Text(
                                 text = "$10,554.88",
-                                fontSize = 14.sp,
+                                fontSize = 16.sp,
                                 fontWeight = FontWeight(400),
                                 color = fontColor
                             )
@@ -300,7 +300,7 @@ fun HomeComp(navController: NavController) {
                             ) {
                                 Text(
                                     text = "1.445%",
-                                    fontSize = 14.sp,
+                                    fontSize = 16.sp,
                                     fontWeight = FontWeight(400),
                                     color = mainRedColor
                                 )
@@ -316,14 +316,14 @@ fun HomeComp(navController: NavController) {
                         var BTN1 by remember {
                             mutableStateOf(true)
                         }
-                        Spacer(modifier = Modifier.height(10.dp))
+                        Spacer(modifier = Modifier.height(14.dp))
                         Row(
                             Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Button(
                                 onClick = { BTN1 = true },
-                                modifier = Modifier.size(120.dp, 30.dp),
+                                modifier = Modifier.size(140.dp, 35.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = if (BTN1) MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
                                 ),
@@ -346,17 +346,17 @@ fun HomeComp(navController: NavController) {
                                     Spacer(modifier = Modifier.width(10.dp))
                                     Text(
                                         text = "Deposit",
-                                        fontSize = 15.sp,
+                                        fontSize = 17.5.sp,
                                         fontWeight = FontWeight(400),
                                         color = if (BTN1) mainfontDark else fontColor
                                     )
                                 }
 
                             }
-                            Spacer(modifier = Modifier.width(5.dp))
+                            Spacer(modifier = Modifier.width(8.dp))
                             Button(
                                 onClick = { BTN1 = false },
-                                modifier = Modifier.size(120.dp, 30.dp),
+                                modifier = Modifier.size(140.dp, 35.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = if (!BTN1) MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
                                 ),
@@ -369,7 +369,7 @@ fun HomeComp(navController: NavController) {
                                 ) {
                                     Text(
                                         text = "Withdraw",
-                                        fontSize = 15.sp,
+                                        fontSize = 17.5.sp,
                                         fontWeight = FontWeight(400),
                                         color = if (!BTN1) mainfontDark else fontColor
                                     )
@@ -389,9 +389,9 @@ fun HomeComp(navController: NavController) {
                 }
 
                 Box(modifier = Modifier
-                    .width(355.dp)
-                    .height(191.dp)
-                    .padding(start = 0.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
+                    .width(380.dp)
+                    .height(210.dp)
+                    .padding(start = 5.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
                     .shadow()
                     .drawWithCache {
                         onDrawBehind {
@@ -407,7 +407,7 @@ fun HomeComp(navController: NavController) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(10.dp)
+                            .padding(start = 15.dp, end = 15.dp, top = 20.dp, bottom = 10.dp)
                     ) {
                         //row1
                         Row(
@@ -416,7 +416,7 @@ fun HomeComp(navController: NavController) {
                         ) {
                             Text(
                                 text = "Total Balance",
-                                fontSize = 11.5.sp,
+                                fontSize = 13.5.sp,
                                 fontWeight = FontWeight(700),
                                 color = fontColor
                             )
@@ -433,7 +433,7 @@ fun HomeComp(navController: NavController) {
                             Text(text = buildAnnotatedString {
                                 withStyle(
                                     SpanStyle(
-                                        fontSize = 27.sp,
+                                        fontSize = 29.sp,
                                         fontWeight = FontWeight(500),
                                         color = fontColor
                                     )
@@ -443,7 +443,7 @@ fun HomeComp(navController: NavController) {
 
                                 withStyle(
                                     SpanStyle(
-                                        fontSize = 27.sp,
+                                        fontSize = 29.sp,
                                         fontWeight = FontWeight(250),
                                         color = fontColor
                                     )
@@ -453,7 +453,7 @@ fun HomeComp(navController: NavController) {
 
                                 withStyle(
                                     SpanStyle(
-                                        fontSize = 27.sp,
+                                        fontSize = 29.sp,
                                         fontWeight = FontWeight(250),
                                         color = fontColor
                                     )
@@ -470,7 +470,7 @@ fun HomeComp(navController: NavController) {
                         ) {
                             Text(
                                 text = "$10,554.88",
-                                fontSize = 14.sp,
+                                fontSize = 16.sp,
                                 fontWeight = FontWeight(400),
                                 color = fontColor
                             )
@@ -481,7 +481,7 @@ fun HomeComp(navController: NavController) {
                             ) {
                                 Text(
                                     text = "1.445%",
-                                    fontSize = 14.sp,
+                                    fontSize = 16.sp,
                                     fontWeight = FontWeight(400),
                                     color = mainRedColor
                                 )
@@ -497,14 +497,14 @@ fun HomeComp(navController: NavController) {
                         var BTN1 by remember {
                             mutableStateOf(true)
                         }
-                        Spacer(modifier = Modifier.height(10.dp))
+                        Spacer(modifier = Modifier.height(14.dp))
                         Row(
                             Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Button(
                                 onClick = { BTN1 = true },
-                                modifier = Modifier.size(120.dp, 30.dp),
+                                modifier = Modifier.size(140.dp, 35.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = if (BTN1) MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
                                 ),
@@ -527,17 +527,17 @@ fun HomeComp(navController: NavController) {
                                     Spacer(modifier = Modifier.width(10.dp))
                                     Text(
                                         text = "Deposit",
-                                        fontSize = 15.sp,
+                                        fontSize = 17.5.sp,
                                         fontWeight = FontWeight(400),
                                         color = if (BTN1) mainfontDark else fontColor
                                     )
                                 }
 
                             }
-                            Spacer(modifier = Modifier.width(5.dp))
+                            Spacer(modifier = Modifier.width(8.dp))
                             Button(
                                 onClick = { BTN1 = false },
-                                modifier = Modifier.size(120.dp, 30.dp),
+                                modifier = Modifier.size(140.dp, 35.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = if (!BTN1) MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
                                 ),
@@ -550,7 +550,7 @@ fun HomeComp(navController: NavController) {
                                 ) {
                                     Text(
                                         text = "Withdraw",
-                                        fontSize = 15.sp,
+                                        fontSize = 17.5.sp,
                                         fontWeight = FontWeight(400),
                                         color = if (!BTN1) mainfontDark else fontColor
                                     )
@@ -570,9 +570,9 @@ fun HomeComp(navController: NavController) {
                 }
 
                 Box(modifier = Modifier
-                    .width(355.dp)
-                    .height(191.dp)
-                    .padding(start = 0.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
+                    .width(380.dp)
+                    .height(210.dp)
+                    .padding(start = 5.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
                     .shadow()
                     .drawWithCache {
                         onDrawBehind {
@@ -588,7 +588,7 @@ fun HomeComp(navController: NavController) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(10.dp)
+                            .padding(start = 15.dp, end = 15.dp, top = 20.dp, bottom = 10.dp)
                     ) {
                         //row1
                         Row(
@@ -597,7 +597,7 @@ fun HomeComp(navController: NavController) {
                         ) {
                             Text(
                                 text = "Total Balance",
-                                fontSize = 11.5.sp,
+                                fontSize = 13.5.sp,
                                 fontWeight = FontWeight(700),
                                 color = fontColor
                             )
@@ -614,7 +614,7 @@ fun HomeComp(navController: NavController) {
                             Text(text = buildAnnotatedString {
                                 withStyle(
                                     SpanStyle(
-                                        fontSize = 27.sp,
+                                        fontSize = 29.sp,
                                         fontWeight = FontWeight(500),
                                         color = fontColor
                                     )
@@ -624,7 +624,7 @@ fun HomeComp(navController: NavController) {
 
                                 withStyle(
                                     SpanStyle(
-                                        fontSize = 27.sp,
+                                        fontSize = 29.sp,
                                         fontWeight = FontWeight(250),
                                         color = fontColor
                                     )
@@ -634,7 +634,7 @@ fun HomeComp(navController: NavController) {
 
                                 withStyle(
                                     SpanStyle(
-                                        fontSize = 27.sp,
+                                        fontSize = 29.sp,
                                         fontWeight = FontWeight(250),
                                         color = fontColor
                                     )
@@ -651,7 +651,7 @@ fun HomeComp(navController: NavController) {
                         ) {
                             Text(
                                 text = "$10,554.88",
-                                fontSize = 14.sp,
+                                fontSize = 16.sp,
                                 fontWeight = FontWeight(400),
                                 color = fontColor
                             )
@@ -662,7 +662,7 @@ fun HomeComp(navController: NavController) {
                             ) {
                                 Text(
                                     text = "1.445%",
-                                    fontSize = 14.sp,
+                                    fontSize = 16.sp,
                                     fontWeight = FontWeight(400),
                                     color = mainRedColor
                                 )
@@ -678,14 +678,14 @@ fun HomeComp(navController: NavController) {
                         var BTN1 by remember {
                             mutableStateOf(true)
                         }
-                        Spacer(modifier = Modifier.height(10.dp))
+                        Spacer(modifier = Modifier.height(14.dp))
                         Row(
                             Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Button(
                                 onClick = { BTN1 = true },
-                                modifier = Modifier.size(120.dp, 30.dp),
+                                modifier = Modifier.size(140.dp, 35.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = if (BTN1) MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
                                 ),
@@ -708,17 +708,17 @@ fun HomeComp(navController: NavController) {
                                     Spacer(modifier = Modifier.width(10.dp))
                                     Text(
                                         text = "Deposit",
-                                        fontSize = 15.sp,
+                                        fontSize = 17.5.sp,
                                         fontWeight = FontWeight(400),
                                         color = if (BTN1) mainfontDark else fontColor
                                     )
                                 }
 
                             }
-                            Spacer(modifier = Modifier.width(5.dp))
+                            Spacer(modifier = Modifier.width(8.dp))
                             Button(
                                 onClick = { BTN1 = false },
-                                modifier = Modifier.size(120.dp, 30.dp),
+                                modifier = Modifier.size(140.dp, 35.dp),
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = if (!BTN1) MaterialTheme.colorScheme.onPrimaryContainer else Color.Transparent
                                 ),
@@ -731,7 +731,7 @@ fun HomeComp(navController: NavController) {
                                 ) {
                                     Text(
                                         text = "Withdraw",
-                                        fontSize = 15.sp,
+                                        fontSize = 17.5.sp,
                                         fontWeight = FontWeight(400),
                                         color = if (!BTN1) mainfontDark else fontColor
                                     )
@@ -768,35 +768,35 @@ fun HomeComp(navController: NavController) {
 
                 Box(
                     modifier = Modifier
-                        .size(if (turn == 1) 30.dp else 7.dp, 7.dp)
+                        .size(if (turn == 1) 35.dp else 9.dp, 9.dp)
                         .shadow(3.dp, RoundedCornerShape(100))
                         .clip(RoundedCornerShape(100))
                         .background(MaterialTheme.colorScheme.primaryContainer)
 
                 )
 
-                Spacer(modifier = Modifier.width(5.dp))
+                Spacer(modifier = Modifier.width(7.dp))
                 Box(
                     modifier = Modifier
-                        .size(if (turn == 2) 30.dp else 7.dp, 7.dp)
+                        .size(if (turn == 2) 35.dp else 9.dp, 9.dp)
                         .shadow(3.dp, RoundedCornerShape(100))
                         .clip(RoundedCornerShape(100))
                         .background(MaterialTheme.colorScheme.primaryContainer)
                 )
 
-                Spacer(modifier = Modifier.width(5.dp))
+                Spacer(modifier = Modifier.width(7.dp))
                 Box(
                     modifier = Modifier
-                        .size(if (turn == 3) 30.dp else 7.dp, 7.dp)
+                        .size(if (turn == 3) 35.dp else 9.dp, 9.dp)
                         .shadow(3.dp, RoundedCornerShape(100))
                         .clip(RoundedCornerShape(100))
                         .background(MaterialTheme.colorScheme.primaryContainer)
                 )
 
 
-                if (scrollState.value > 350 && scrollState.value < 1050) {
+                if (scrollState.value > 450 && scrollState.value < 1450) {
                     turn = 2
-                } else if (scrollState.value >= 1050) {
+                } else if (scrollState.value >= 1450) {
                     turn = 3
                 } else {
                     turn = 1
@@ -813,7 +813,9 @@ fun HomeComp(navController: NavController) {
 
 
         }
-        */
+
+             */
+
 
             //sec 2
 
@@ -864,7 +866,7 @@ fun HomeComp(navController: NavController) {
 
             var BTNColor = MaterialTheme.colorScheme.secondary
             Box(modifier = Modifier
-                .width(355.dp)
+                .fillMaxWidth(0.95f)
                 .height(380.dp)
                 .padding(start = 5.dp, top = 10.dp, end = 5.dp, bottom = 10.dp)
                 .shadow()
@@ -896,20 +898,21 @@ fun HomeComp(navController: NavController) {
                             Text(
                                 text = "In Order: ",
                                 fontWeight = FontWeight(300),
-                                fontSize = 14.sp,
+                                fontSize = 16.sp,
                                 color = fontColor
                             )
                             Text(
                                 text = " 256.45 BTC",
                                 fontWeight = FontWeight(700),
-                                fontSize = 14.sp,
+                                fontSize = 16.sp,
                                 color = fontColor
                             )
 
                         }
                         LinearProgressIndicator(
+
                             progress = 0.45f, modifier = Modifier
-                                .size(100.dp, 6.dp)
+                                .size(110.dp, 8.dp)
                                 .clip(
                                     RoundedCornerShape(100)
                                 ), backgroundColor = Color(0xFF979797),
@@ -929,13 +932,13 @@ fun HomeComp(navController: NavController) {
                             Text(
                                 text = "Daily Limit: ",
                                 fontWeight = FontWeight(300),
-                                fontSize = 14.sp,
+                                fontSize = 16.sp,
                                 color = fontColor
                             )
                             Text(
                                 text = " $75,000",
                                 fontWeight = FontWeight(700),
-                                fontSize = 14.sp,
+                                fontSize = 16.sp,
                                 color = fontColor
                             )
 
@@ -948,11 +951,11 @@ fun HomeComp(navController: NavController) {
                                         drawPath(path, BTNColor, style = Fill)
                                     }
                                 }
-                                .size(25.dp)
+                                .size(30.dp)
 
                             ) {
                                 Icon(
-                                    modifier = Modifier.fillMaxSize(),
+                                    modifier = Modifier.fillMaxSize(0.9f),
                                     painter = painterResource(id = R.drawable.arrowup),
                                     contentDescription = null,
                                     tint = Color.White
@@ -963,9 +966,8 @@ fun HomeComp(navController: NavController) {
 
                         }
                         LinearProgressIndicator(
-                            strokeCap = StrokeCap.Square ,
                             progress = 0.8f, modifier = Modifier
-                                .size(100.dp, 6.dp)
+                                .size(110.dp, 8.dp)
                                 .clip(
                                     RoundedCornerShape(100)
                                 ), backgroundColor = Color(0xFF979797),
@@ -1009,7 +1011,7 @@ fun HomeComp(navController: NavController) {
                                     )
                                 }
                             }
-                            .size(30.dp)
+                            .size(35.dp)
 
                         ) {
                             Icon(
@@ -1034,7 +1036,7 @@ fun HomeComp(navController: NavController) {
                                     )
                                 }
                             }
-                            .size(30.dp)
+                            .size(35.dp)
 
                         ) {
                             Icon(
@@ -1059,7 +1061,7 @@ fun HomeComp(navController: NavController) {
                                     )
                                 }
                             }
-                            .size(30.dp)
+                            .size(35.dp)
 
                         ) {
                             Icon(
@@ -1078,7 +1080,7 @@ fun HomeComp(navController: NavController) {
                                 onDrawBehind {
                                     val path = genPathBTN(size)
                                     val stroke = Stroke(
-                                        width = 3f,
+                                        width = 4f,
                                         pathEffect = PathEffect.dashPathEffect(
                                             floatArrayOf(10f, 10f),
                                             0f
@@ -1097,7 +1099,7 @@ fun HomeComp(navController: NavController) {
                                     )
                                 }
                             }
-                            .size(30.dp)
+                            .size(35.dp)
 
                         ) {
                             Icon(
@@ -1122,7 +1124,7 @@ fun HomeComp(navController: NavController) {
                                         withStyle(
                                             SpanStyle(
                                                 fontWeight = FontWeight(300),
-                                                fontSize = 12.sp,
+                                                fontSize = 14.sp,
                                                 color = fontColor
                                             )
                                         ) {
@@ -1131,7 +1133,7 @@ fun HomeComp(navController: NavController) {
                                         withStyle(
                                             SpanStyle(
                                                 fontWeight = FontWeight(500),
-                                                fontSize = 14.sp,
+                                                fontSize = 16.sp,
                                                 color = fontColor
                                             )
                                         ) {
@@ -1140,7 +1142,7 @@ fun HomeComp(navController: NavController) {
                                         withStyle(
                                             SpanStyle(
                                                 fontWeight = FontWeight(300),
-                                                fontSize = 12.sp,
+                                                fontSize = 14.sp,
                                                 color = fontColor
                                             )
                                         ) {
@@ -1163,7 +1165,7 @@ fun HomeComp(navController: NavController) {
                                         withStyle(
                                             SpanStyle(
                                                 fontWeight = FontWeight(300),
-                                                fontSize = 12.sp,
+                                                fontSize = 14.sp,
                                                 color = fontColor
                                             )
                                         ) {
@@ -1172,7 +1174,7 @@ fun HomeComp(navController: NavController) {
                                         withStyle(
                                             SpanStyle(
                                                 fontWeight = FontWeight(500),
-                                                fontSize = 14.sp,
+                                                fontSize = 16.sp,
                                                 color = fontColor
                                             )
                                         ) {
@@ -1181,7 +1183,7 @@ fun HomeComp(navController: NavController) {
                                         withStyle(
                                             SpanStyle(
                                                 fontWeight = FontWeight(300),
-                                                fontSize = 12.sp,
+                                                fontSize = 14.sp,
                                                 color = fontColor
                                             )
                                         ) {
@@ -1196,7 +1198,7 @@ fun HomeComp(navController: NavController) {
                                         withStyle(
                                             SpanStyle(
                                                 fontWeight = FontWeight(300),
-                                                fontSize = 12.sp,
+                                                fontSize = 14.sp,
                                                 color = mainGreenColor
                                             )
                                         ) {
@@ -1205,7 +1207,7 @@ fun HomeComp(navController: NavController) {
                                         withStyle(
                                             SpanStyle(
                                                 fontWeight = FontWeight(500),
-                                                fontSize = 14.sp,
+                                                fontSize = 16.sp,
                                                 color = mainGreenColor
                                             )
                                         ) {
@@ -1214,7 +1216,7 @@ fun HomeComp(navController: NavController) {
                                         withStyle(
                                             SpanStyle(
                                                 fontWeight = FontWeight(300),
-                                                fontSize = 12.sp,
+                                                fontSize = 14.sp,
                                                 color = mainGreenColor
                                             )
                                         ) {
@@ -1244,25 +1246,25 @@ fun HomeComp(navController: NavController) {
                                 Text(
                                     text = "2000",
                                     fontWeight = FontWeight(300),
-                                    fontSize = 10.sp,
+                                    fontSize = 11.sp,
                                     color = fontColor
                                 )
                                 Text(
                                     text = "1500",
                                     fontWeight = FontWeight(300),
-                                    fontSize = 10.sp,
+                                    fontSize = 11.sp,
                                     color = fontColor
                                 )
                                 Text(
                                     text = "1000",
                                     fontWeight = FontWeight(300),
-                                    fontSize = 10.sp,
+                                    fontSize = 11.sp,
                                     color = fontColor
                                 )
                                 Text(
                                     text = "800",
                                     fontWeight = FontWeight(300),
-                                    fontSize = 10.sp,
+                                    fontSize = 11.sp,
                                     color = fontColor
                                 )
                             }
@@ -1283,7 +1285,7 @@ fun HomeComp(navController: NavController) {
                                         .fillMaxSize()
                                 ) {
 
-                                    val barWidthPx = 1.dp.toPx()
+                                    val barWidthPx = 1.5.dp.toPx()
                                     drawRect(graphColor, style = Stroke(barWidthPx))
 
                                     //line vertical
@@ -1362,7 +1364,7 @@ fun HomeComp(navController: NavController) {
                                     var x = 30f
                                     listOfY.forEach {
                                         innerPath.lineTo(x, size.height - it)
-                                        x += 30f
+                                        x += 43f
                                     }
 
 
@@ -1399,7 +1401,7 @@ fun HomeComp(navController: NavController) {
                                             )
                                         }
                                     })
-
+                                // opacity decreaser for line
                                 Box(
                                     modifier = Modifier
                                         .fillMaxHeight()
@@ -1427,32 +1429,32 @@ fun HomeComp(navController: NavController) {
                             Text(
                                 text = "jun 20",
                                 fontWeight = FontWeight(400),
-                                fontSize = 11.sp,
+                                fontSize = 12.sp,
                                 color = fontColor
                             )
 
                             Text(
                                 text = "jun 21",
                                 fontWeight = FontWeight(400),
-                                fontSize = 11.sp,
+                                fontSize = 12.sp,
                                 color = fontColor
                             )
                             Text(
                                 text = "jun 22",
                                 fontWeight = FontWeight(400),
-                                fontSize = 11.sp,
+                                fontSize = 12.sp,
                                 color = fontColor
                             )
                             Text(
                                 text = "jun 23",
                                 fontWeight = FontWeight(400),
-                                fontSize = 11.sp,
+                                fontSize = 12.sp,
                                 color = fontColor
                             )
                             Text(
                                 text = "jun24",
                                 fontWeight = FontWeight(400),
-                                fontSize = 11.sp,
+                                fontSize = 12.sp,
                                 color = fontColor
                             )
                         }
@@ -1472,7 +1474,6 @@ fun HomeComp(navController: NavController) {
             }
 
             //sec 3
-
             Box(modifier = Modifier
                 .fillMaxWidth(0.95f)
                 .height(230.dp)
@@ -1487,143 +1488,145 @@ fun HomeComp(navController: NavController) {
                 }
                 .align(Alignment.CenterHorizontally)
             )
+
             {
 
                 Column {
-                Row (modifier= Modifier
-                    .fillMaxWidth()
-                    .padding(start = 20.dp, top = 10.dp)){
-                    Text(text = "Portfolio",
-                        fontWeight = FontWeight(600),
-                        fontSize = 15.sp,
-                        color = fontColor)
-                }
-                Row (Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly){
-                    Box(modifier = Modifier, contentAlignment = Alignment.Center){
-                        Canvas(modifier = Modifier.size(115.dp) ){
-                            drawCircle(
-                                color = mainProtfolioColor,
-                                alpha = 1f,
-                                style = Stroke(
-                                    width = 10f
+                    Row (modifier= Modifier
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, top = 10.dp)){
+                        Text(text = "Portfolio",
+                            fontWeight = FontWeight(600),
+                            fontSize = 15.sp,
+                            color = fontColor)
+                    }
+
+                    Row (Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly){
+                        Box(modifier = Modifier, contentAlignment = Alignment.Center){
+                            Canvas(modifier = Modifier.size(115.dp) ){
+                                drawCircle(
+                                    color = mainProtfolioColor,
+                                    alpha = 1f,
+                                    style = Stroke(
+                                        width = 10f
+                                    )
                                 )
-                            )
+                            }
+                            CircularSlider(modifier = Modifier.size(120.dp), thumbColor = BTNColor, place = 400)
+                            CircularSlider(modifier = Modifier.size(120.dp),thumbColor = BTCColor , place = 320)
+                            CircularSlider(modifier = Modifier.size(120.dp),thumbColor = ETHColor, place = 140)
+                            CircularSlider(modifier = Modifier.size(120.dp),thumbColor = BTCColor, place = 90)
+                            CircularSlider(modifier = Modifier.size(120.dp),thumbColor = PPCColor, place = 340)
+                            CircularSlider(modifier = Modifier.size(120.dp),thumbColor = BTCColor, place = 200)
+                            CircularSlider(modifier = Modifier.size(120.dp),thumbColor = ETHColor, place = 240)
+
+
+
                         }
-                        CircularSlider(modifier = Modifier.size(120.dp), thumbColor = BTNColor, place = 400)
-                        CircularSlider(modifier = Modifier.size(120.dp),thumbColor = BTCColor , place = 320)
-                        CircularSlider(modifier = Modifier.size(120.dp),thumbColor = ETHColor, place = 140)
-                        CircularSlider(modifier = Modifier.size(120.dp),thumbColor = BTCColor, place = 90)
-                        CircularSlider(modifier = Modifier.size(120.dp),thumbColor = PPCColor, place = 340)
-                        CircularSlider(modifier = Modifier.size(120.dp),thumbColor = BTCColor, place = 200)
-                        CircularSlider(modifier = Modifier.size(120.dp),thumbColor = ETHColor, place = 240)
+                        Column {
+                            Text(text = buildAnnotatedString {
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = BTCColor
+                                    )
+                                ){
+                                    append("BTC = ")
+                                }
+
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = Color.White
+                                    )
+                                ){
+                                    append("0.087654")
+                                }
+                            })
 
 
 
+                            Text(text = buildAnnotatedString {
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = ETHColor
+                                    )
+                                ){
+                                    append("ETH = ")
+                                }
+
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = Color.White
+                                    )
+                                ){
+                                    append("1.456543")
+                                }
+                            })
+
+                            Text(text = buildAnnotatedString {
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = PPCColor
+                                    )
+                                ){
+                                    append("PPC = ")
+                                }
+
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = Color.White
+                                    )
+                                ){
+                                    append("200.13342")
+                                }
+                            })
+
+                            Text(text = buildAnnotatedString {
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = BTNColor
+                                    )
+                                ){
+                                    append("Others = ")
+                                }
+
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = Color.White
+                                    )
+                                ){
+                                    append("0.11032")
+                                }
+                            })
+                        }
                     }
-                    Column {
-                        Text(text = buildAnnotatedString {
-                            withStyle(
-                                SpanStyle(
-                                    fontWeight = FontWeight(400),
-                                    fontSize = 17.sp,
-                                    color = BTCColor
-                                )
-                            ){
-                                append("BTC = ")
-                            }
-
-                            withStyle(
-                                SpanStyle(
-                                    fontWeight = FontWeight(400),
-                                    fontSize = 17.sp,
-                                    color = Color.White
-                                )
-                            ){
-                                append("0.087654")
-                            }
-                        })
-
-
-
-                        Text(text = buildAnnotatedString {
-                            withStyle(
-                                SpanStyle(
-                                    fontWeight = FontWeight(400),
-                                    fontSize = 17.sp,
-                                    color = ETHColor
-                                )
-                            ){
-                                append("ETH = ")
-                            }
-
-                            withStyle(
-                                SpanStyle(
-                                    fontWeight = FontWeight(400),
-                                    fontSize = 17.sp,
-                                    color = Color.White
-                                )
-                            ){
-                                append("1.456543")
-                            }
-                        })
-
-                        Text(text = buildAnnotatedString {
-                            withStyle(
-                                SpanStyle(
-                                    fontWeight = FontWeight(400),
-                                    fontSize = 17.sp,
-                                    color = PPCColor
-                                )
-                            ){
-                                append("PPC = ")
-                            }
-
-                            withStyle(
-                                SpanStyle(
-                                    fontWeight = FontWeight(400),
-                                    fontSize = 17.sp,
-                                    color = Color.White
-                                )
-                            ){
-                                append("200.13342")
-                            }
-                        })
-
-                        Text(text = buildAnnotatedString {
-                            withStyle(
-                                SpanStyle(
-                                    fontWeight = FontWeight(400),
-                                    fontSize = 17.sp,
-                                    color = BTNColor
-                                )
-                            ){
-                                append("Others = ")
-                            }
-
-                            withStyle(
-                                SpanStyle(
-                                    fontWeight = FontWeight(400),
-                                    fontSize = 17.sp,
-                                    color = Color.White
-                                )
-                            ){
-                                append("0.11032")
-                            }
-                        })
-                    }
-                }
 
 
                 }
 
             }
-            Spacer(modifier = Modifier.width(20.dp))
+
+
+            Spacer(modifier = Modifier.height(20.dp))
             //sec 4
 
             //sec n
             //end body
         }
-
-
 
 }
