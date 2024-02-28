@@ -17,10 +17,13 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -40,8 +43,10 @@ import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.onitrade.ui.theme.BTCColor
 import com.example.onitrade.ui.theme.ETHColor
@@ -80,9 +85,9 @@ fun TradeComp(navController: NavController) {
             "token" to "BTC",
             "icon" to R.drawable.btc,
             "color" to BTCColor,
-            "pricer" to "ETH",
-            "pricerIcon" to R.drawable.eter,
-            "pricerColor" to ETHColor,
+            "pricer" to "PPC",
+            "pricerIcon" to R.drawable.leaf,
+            "pricerColor" to PPCColor,
             "totalToken" to "1.30026",
             "totalPricer" to "2400.4221",
             "percentFloat" to 0.5f,
@@ -322,36 +327,58 @@ fun TradeComp(navController: NavController) {
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
 
+                    //Icons & on Icons
                     Box(
                         modifier = Modifier
                             .fillMaxHeight()
-                            .width(60.dp)
+                            .width(80.dp)
                             .background(Color.Red), contentAlignment = Alignment.Center
                     ) {
                         val iconColor = token["color"] as Color
                         Box(modifier = Modifier
-                            .fillMaxSize(0.8f)
-                            .clip(RoundedCornerShape(100)).background(iconColor), contentAlignment = Alignment.Center) {
+                            .size(50.dp)
+                            .clip(RoundedCornerShape(100))
+                            .background(iconColor)
+                            .border(2.dp, Color.White, RoundedCornerShape(100)), contentAlignment = Alignment.Center) {
                             val icon = token["icon"] as Int
 
                             Icon(modifier = Modifier.fillMaxSize(0.8f),painter = painterResource(id = icon), contentDescription =null , tint = Color.White )
                         }
+
                         Box(modifier = Modifier
                             .fillMaxSize()
                             .background(Color.Transparent), contentAlignment = Alignment.BottomEnd) {
-
+                            val pricerColor = token["pricerColor"] as Color
                             Box(modifier = Modifier
-                                .fillMaxSize(0.5f)
-                                .clip(RoundedCornerShape(100)).background(iconColor), contentAlignment = Alignment.Center) {
-                                val icon = token["icon"] as Int
+                                .size(35.dp)
+                                .clip(RoundedCornerShape(100))
+                                .background(pricerColor)
+                                .border(2.dp, Color.White, RoundedCornerShape(100)), contentAlignment = Alignment.Center) {
+                                val icon = token["pricerIcon"] as Int
 
-                                Icon(modifier = Modifier.fillMaxSize(0.8f),painter = painterResource(id = icon), contentDescription =null , tint = Color.White )
+                                Icon(modifier = Modifier.fillMaxSize(0.6f),painter = painterResource(id = icon), contentDescription =null , tint = Color.White )
                             }
 
                         }
 
                     }
-                }//badan por mikonim
+                    // end icon & on icon
+                    Column(
+                        Modifier
+                            .fillMaxSize()
+                            .padding(start = 10.dp, end = 10.dp), verticalArrangement = Arrangement.SpaceAround , horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Row (modifier = Modifier.fillMaxWidth()){
+                            val tokenName = token["token"] as String
+                            val pricerName = token["pricer"] as String
+                            Text(text = "$tokenName/$pricerName"
+                                ,fontSize = 15.sp,
+                                fontWeight = FontWeight(600),
+                                color = fontColor)
+                        }
+                    }
+
+                }
 
                 AnimatedVisibility(
                     modifier = Modifier.fillMaxWidth(), visible = isSelected,
