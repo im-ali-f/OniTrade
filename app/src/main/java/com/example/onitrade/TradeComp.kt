@@ -58,6 +58,9 @@ import com.example.onitrade.ui.theme.BTCColor
 import com.example.onitrade.ui.theme.ETHColor
 import com.example.onitrade.ui.theme.PPCColor
 import com.example.onitrade.ui.theme.XLMColor
+import com.example.onitrade.ui.theme.mainFontColorStatic
+import com.example.onitrade.ui.theme.mainFontColorStatic2
+import com.example.onitrade.ui.theme.mainGreenColor
 import com.example.onitrade.ui.theme.mainIconContainer
 import com.example.onitrade.ui.theme.mainSeperatorColor
 import com.example.onitrade.ui.theme.mainYellowColor
@@ -414,15 +417,18 @@ fun TradeComp(navController: NavController) {
                             val progressFloat = token["percentFloat"] as Float
                             val progressInt = token["percentInt"] as Int
                             val iconColor = token["color"] as Color
-                            Row (Modifier.fillMaxWidth(0.8f), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween){
+                            Row(
+                                Modifier.fillMaxWidth(0.8f),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
                                 LinearProgressIndicator(
                                     progress = progressFloat,
                                     modifier = Modifier
                                         .size(90.dp, 5.dp)
                                         .clip(
                                             RoundedCornerShape(100)
-                                        )
-                                    ,
+                                        ),
                                     color = iconColor
 
                                 )
@@ -447,7 +453,7 @@ fun TradeComp(navController: NavController) {
                             val tokenTotal = token["totalToken"] as String
                             val pricerTotal = token["totalPricer"] as String
 
-                            
+
                             Text(
                                 text = "$tokenTotal $tokenName", fontSize = 11.sp,
                                 fontWeight = FontWeight(300),
@@ -459,15 +465,18 @@ fun TradeComp(navController: NavController) {
                                 color = fontColor
                             )
 
-                            IconButton(onClick = { isSelected = !isSelected},
+                            IconButton(
+                                onClick = { isSelected = !isSelected },
                                 modifier = Modifier
                                     .clip(RoundedCornerShape(100))
                                     .size(20.dp)
                                     .background(mainIconContainer),
                             ) {
                                 Icon(
-                                    modifier = Modifier.fillMaxSize().align(Alignment.CenterVertically),
-                                    imageVector = if(isSelected) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .align(Alignment.CenterVertically),
+                                    imageVector = if (isSelected) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                                     contentDescription = null,
                                     tint = Color.White
                                 )
@@ -494,9 +503,171 @@ fun TradeComp(navController: NavController) {
                     Column(
                         Modifier
                             .fillMaxWidth()
-                            .height(200.dp)
+                            .padding(start = 35.dp, top = 30.dp, end = 35.dp, bottom = 15.dp)
                             .background(Color.Transparent)
                     ) {
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Order ID :", fontSize = 15.sp,
+                                fontWeight = FontWeight(600),
+                                color = fontColor
+                            )
+                            Text(
+                                text = "0001320#4e5", fontSize = 12.sp,
+                                fontWeight = FontWeight(400),
+                                color = fontColor
+                            )
+                        }
+
+
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Price :", fontSize = 15.sp,
+                                fontWeight = FontWeight(600),
+                                color = fontColor
+                            )
+                            Text(
+                                text = "0.002300 BTC", fontSize = 12.sp,
+                                fontWeight = FontWeight(400),
+                                color = fontColor
+                            )
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Date :", fontSize = 15.sp,
+                                fontWeight = FontWeight(600),
+                                color = fontColor
+                            )
+                            Text(
+                                text = "2018.01.24 at 08:04:05", fontSize = 12.sp,
+                                fontWeight = FontWeight(400),
+                                color = fontColor
+                            )
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Requested :", fontSize = 15.sp,
+                                fontWeight = FontWeight(600),
+                                color = fontColor
+                            )
+                            Text(
+                                text = "150", fontSize = 12.sp,
+                                fontWeight = FontWeight(400),
+                                color = fontColor
+                            )
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Canceled :", fontSize = 15.sp,
+                                fontWeight = FontWeight(600),
+                                color = fontColor
+                            )
+                            Text(
+                                text = "10 (10%)", fontSize = 12.sp,
+                                fontWeight = FontWeight(400),
+                                color = fontColor
+                            )
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Filled :", fontSize = 15.sp,
+                                fontWeight = FontWeight(600),
+                                color = fontColor
+                            )
+                            Text(
+                                text = "140 (90%)", fontSize = 12.sp,
+                                fontWeight = FontWeight(400),
+                                color = fontColor
+                            )
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Method :", fontSize = 15.sp,
+                                fontWeight = FontWeight(600),
+                                color = fontColor
+                            )
+                            Row(
+                                Modifier.fillMaxWidth(0.75f),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(50.dp, 25.dp)
+                                        .clip(RoundedCornerShape(7.dp)),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = "Mobile", fontSize = 13.5.sp,
+                                        fontWeight = FontWeight(500),
+                                        color = mainFontColorStatic2
+                                    )
+                                }
+
+                                Box(
+                                    modifier = Modifier
+                                        .size(50.dp, 25.dp)
+                                        .clip(RoundedCornerShape(7.dp))
+                                        .background(mainGreenColor),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = "Web", fontSize = 13.5.sp,
+                                        fontWeight = FontWeight(500),
+                                        color = mainFontColorStatic2
+                                    )
+                                }
+
+                                Box(
+                                    modifier = Modifier
+                                        .size(50.dp, 25.dp)
+                                        .clip(RoundedCornerShape(7.dp)),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = "API", fontSize = 13.5.sp,
+                                        fontWeight = FontWeight(500),
+                                        color = mainFontColorStatic2
+                                    )
+                                }
+                            }
+                        }
+
 
                     }
                 }
