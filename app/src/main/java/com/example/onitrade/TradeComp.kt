@@ -340,13 +340,13 @@ fun TradeComp(navController: NavController) {
                     //Icons & on Icons
                     Box(
                         modifier = Modifier
-                            .fillMaxHeight()
-                            .width(70.dp), contentAlignment = Alignment.Center
+                            .fillMaxHeight(0.9f)
+                            .width(55.dp), contentAlignment = Alignment.Center
                     ) {
                         val iconColor = token["color"] as Color
                         Box(
                             modifier = Modifier
-                                .size(40.dp)
+                                .size(35.dp)
                                 .clip(RoundedCornerShape(100))
                                 .background(iconColor)
                                 .border(2.dp, Color.White, RoundedCornerShape(100)),
@@ -371,7 +371,7 @@ fun TradeComp(navController: NavController) {
                             val pricerColor = token["pricerColor"] as Color
                             Box(
                                 modifier = Modifier
-                                    .size(30.dp)
+                                    .size(25.dp)
                                     .clip(RoundedCornerShape(100))
                                     .background(pricerColor)
                                     .border(2.dp, Color.White, RoundedCornerShape(100)),
@@ -396,7 +396,7 @@ fun TradeComp(navController: NavController) {
                         Modifier
                             .fillMaxSize()
                             .padding(start = 10.dp, end = 10.dp),
-                        verticalArrangement = Arrangement.SpaceAround,
+                        verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         //sec 1
@@ -414,7 +414,7 @@ fun TradeComp(navController: NavController) {
                             val progressFloat = token["percentFloat"] as Float
                             val progressInt = token["percentInt"] as Int
                             val iconColor = token["color"] as Color
-                            Row (Modifier.fillMaxWidth(0.9f), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly){
+                            Row (Modifier.fillMaxWidth(0.8f), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween){
                                 LinearProgressIndicator(
                                     progress = progressFloat,
                                     modifier = Modifier
@@ -449,24 +449,24 @@ fun TradeComp(navController: NavController) {
 
                             
                             Text(
-                                text = "$tokenTotal $tokenName", fontSize = 10.sp,
+                                text = "$tokenTotal $tokenName", fontSize = 11.sp,
                                 fontWeight = FontWeight(300),
                                 color = fontColor
                             )
                             Text(
-                                text = "$pricerTotal $pricerName", fontSize = 10.sp,
+                                text = "$pricerTotal $pricerName", fontSize = 11.sp,
                                 fontWeight = FontWeight(300),
                                 color = fontColor
                             )
 
-                            IconButton(onClick = { /*TODO*/ },
+                            IconButton(onClick = { isSelected = !isSelected},
                                 modifier = Modifier
                                     .clip(RoundedCornerShape(100))
                                     .size(20.dp)
-                                    .background(mainIconContainer)
+                                    .background(mainIconContainer),
                             ) {
                                 Icon(
-                                    modifier = Modifier.fillMaxSize(0.9f),
+                                    modifier = Modifier.fillMaxSize().align(Alignment.CenterVertically),
                                     imageVector = if(isSelected) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                                     contentDescription = null,
                                     tint = Color.White

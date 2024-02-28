@@ -14,7 +14,7 @@ val mainYellowColor = Color(0xFFFFC90E)
 val mainFontColorStatic = Color(0xFFFFFFFF)
 val mainSeperatorColor = Color(0x8DD8D8D8)
 val mainProtfolioColor = Color(0xD07C7B7B)
-val mainIconContainer = Color(0xD04B5166)
+val mainIconContainer = Color(0x8F4B5166)
 
 
 
