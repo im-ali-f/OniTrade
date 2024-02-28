@@ -23,10 +23,15 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,6 +58,7 @@ import com.example.onitrade.ui.theme.BTCColor
 import com.example.onitrade.ui.theme.ETHColor
 import com.example.onitrade.ui.theme.PPCColor
 import com.example.onitrade.ui.theme.XLMColor
+import com.example.onitrade.ui.theme.mainIconContainer
 import com.example.onitrade.ui.theme.mainSeperatorColor
 import com.example.onitrade.ui.theme.mainYellowColor
 
@@ -171,7 +177,8 @@ fun TradeComp(navController: NavController) {
     val scrollState = rememberScrollState()
     Column(
         Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .fillMaxHeight(0.95f)
             .verticalScroll(scrollState)
             .background(MaterialTheme.colorScheme.primary),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -324,23 +331,22 @@ fun TradeComp(navController: NavController) {
 
                 Row(
                     Modifier
-                        .fillMaxWidth()
+                        .width(305.dp)
                         .height(60.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceAround
+                    horizontalArrangement = Arrangement.Center
                 ) {
 
                     //Icons & on Icons
                     Box(
                         modifier = Modifier
                             .fillMaxHeight()
-                            .width(80.dp)
-                            .background(Color.Red), contentAlignment = Alignment.Center
+                            .width(70.dp), contentAlignment = Alignment.Center
                     ) {
                         val iconColor = token["color"] as Color
                         Box(
                             modifier = Modifier
-                                .size(50.dp)
+                                .size(40.dp)
                                 .clip(RoundedCornerShape(100))
                                 .background(iconColor)
                                 .border(2.dp, Color.White, RoundedCornerShape(100)),
@@ -349,7 +355,7 @@ fun TradeComp(navController: NavController) {
                             val icon = token["icon"] as Int
 
                             Icon(
-                                modifier = Modifier.fillMaxSize(0.8f),
+                                modifier = Modifier.fillMaxSize(0.7f),
                                 painter = painterResource(id = icon),
                                 contentDescription = null,
                                 tint = Color.White
@@ -365,7 +371,7 @@ fun TradeComp(navController: NavController) {
                             val pricerColor = token["pricerColor"] as Color
                             Box(
                                 modifier = Modifier
-                                    .size(35.dp)
+                                    .size(30.dp)
                                     .clip(RoundedCornerShape(100))
                                     .background(pricerColor)
                                     .border(2.dp, Color.White, RoundedCornerShape(100)),
@@ -374,7 +380,7 @@ fun TradeComp(navController: NavController) {
                                 val icon = token["pricerIcon"] as Int
 
                                 Icon(
-                                    modifier = Modifier.fillMaxSize(0.6f),
+                                    modifier = Modifier.fillMaxSize(0.55f),
                                     painter = painterResource(id = icon),
                                     contentDescription = null,
                                     tint = Color.White
@@ -385,6 +391,7 @@ fun TradeComp(navController: NavController) {
 
                     }
                     // end icon & on icon
+                    //start infos
                     Column(
                         Modifier
                             .fillMaxSize()
@@ -392,6 +399,7 @@ fun TradeComp(navController: NavController) {
                         verticalArrangement = Arrangement.SpaceAround,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
+                        //sec 1
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
@@ -409,7 +417,8 @@ fun TradeComp(navController: NavController) {
                             Row (Modifier.fillMaxWidth(0.9f), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly){
                                 LinearProgressIndicator(
                                     progress = progressFloat,
-                                    modifier = Modifier.size(90.dp, 5.dp)
+                                    modifier = Modifier
+                                        .size(90.dp, 5.dp)
                                         .clip(
                                             RoundedCornerShape(100)
                                         )
@@ -425,7 +434,51 @@ fun TradeComp(navController: NavController) {
 
                             }
                         }
+
+                        //sec 2
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            val tokenName = token["token"] as String
+                            val pricerName = token["pricer"] as String
+                            val tokenTotal = token["totalToken"] as String
+                            val pricerTotal = token["totalPricer"] as String
+
+                            
+                            Text(
+                                text = "$tokenTotal $tokenName", fontSize = 10.sp,
+                                fontWeight = FontWeight(300),
+                                color = fontColor
+                            )
+                            Text(
+                                text = "$pricerTotal $pricerName", fontSize = 10.sp,
+                                fontWeight = FontWeight(300),
+                                color = fontColor
+                            )
+
+                            IconButton(onClick = { /*TODO*/ },
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(100))
+                                    .size(20.dp)
+                                    .background(mainIconContainer)
+                            ) {
+                                Icon(
+                                    modifier = Modifier.fillMaxSize(0.9f),
+                                    imageVector = if(isSelected) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                                    contentDescription = null,
+                                    tint = Color.White
+                                )
+
+                            }
+
+
+                        }
+                        //end secs
                     }
+                    //end Infos
 
                 }
 
@@ -461,7 +514,7 @@ fun TradeComp(navController: NavController) {
         //section +1 ?
 
 
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(35.dp))
         //end main inner
     }
 }
