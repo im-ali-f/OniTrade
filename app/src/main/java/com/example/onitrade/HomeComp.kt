@@ -3004,7 +3004,155 @@ fun HomeComp(navController: NavController) {
             }
 
             //sec 3
+            Box(modifier = Modifier
+                .fillMaxWidth(0.95f)
+                .height(230.dp)
+                .padding(top = 10.dp, bottom = 10.dp, start = 2.dp, end = 2.dp)
+                .shadow()
+                .drawWithCache {
+                    onDrawBehind {
+                        val path = genPath(size)
 
+                        drawPath(path, bgcColor, style = Fill)
+                    }
+                }
+                .align(Alignment.CenterHorizontally)
+            )
+
+            {
+
+                Column {
+                    Row (modifier= Modifier
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, top = 10.dp)){
+                        Text(text = "Portfolio",
+                            fontWeight = FontWeight(600),
+                            fontSize = 15.sp,
+                            color = fontColor)
+                    }
+
+                    Row (Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly){
+                        Box(modifier = Modifier, contentAlignment = Alignment.Center){
+                            Canvas(modifier = Modifier.size(115.dp) ){
+                                drawCircle(
+                                    color = mainProtfolioColor,
+                                    alpha = 1f,
+                                    style = Stroke(
+                                        width = 10f
+                                    )
+                                )
+                            }
+                            CircularSlider(modifier = Modifier.size(120.dp), thumbColor = BTNColor, place = 400)
+                            CircularSlider(modifier = Modifier.size(120.dp),thumbColor = BTCColor , place = 320)
+                            CircularSlider(modifier = Modifier.size(120.dp),thumbColor = ETHColor, place = 140)
+                            CircularSlider(modifier = Modifier.size(120.dp),thumbColor = BTCColor, place = 90)
+                            CircularSlider(modifier = Modifier.size(120.dp),thumbColor = PPCColor, place = 340)
+                            CircularSlider(modifier = Modifier.size(120.dp),thumbColor = BTCColor, place = 200)
+                            CircularSlider(modifier = Modifier.size(120.dp),thumbColor = ETHColor, place = 240)
+
+
+
+                        }
+                        Column {
+                            Text(text = buildAnnotatedString {
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = BTCColor
+                                    )
+                                ){
+                                    append("BTC = ")
+                                }
+
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = Color.White
+                                    )
+                                ){
+                                    append("0.087654")
+                                }
+                            })
+
+
+
+                            Text(text = buildAnnotatedString {
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = ETHColor
+                                    )
+                                ){
+                                    append("ETH = ")
+                                }
+
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = Color.White
+                                    )
+                                ){
+                                    append("1.456543")
+                                }
+                            })
+
+                            Text(text = buildAnnotatedString {
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = PPCColor
+                                    )
+                                ){
+                                    append("PPC = ")
+                                }
+
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = Color.White
+                                    )
+                                ){
+                                    append("200.13342")
+                                }
+                            })
+
+                            Text(text = buildAnnotatedString {
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = BTNColor
+                                    )
+                                ){
+                                    append("Others = ")
+                                }
+
+                                withStyle(
+                                    SpanStyle(
+                                        fontWeight = FontWeight(400),
+                                        fontSize = 17.sp,
+                                        color = Color.White
+                                    )
+                                ){
+                                    append("0.11032")
+                                }
+                            })
+                        }
+                    }
+
+
+                }
+
+            }
+            
+
+            Spacer(modifier = Modifier.height(20.dp))
             //sec 4
 
             //sec n
