@@ -1539,7 +1539,7 @@ fun HomeComp2(navController: NavController) {
                                     SpanStyle(
                                         fontWeight = FontWeight(400),
                                         fontSize = 17.sp,
-                                        color = Color.White
+                                        color = fontColor
                                     )
                                 ){
                                     append("0.087654")
@@ -1563,7 +1563,7 @@ fun HomeComp2(navController: NavController) {
                                     SpanStyle(
                                         fontWeight = FontWeight(400),
                                         fontSize = 17.sp,
-                                        color = Color.White
+                                        color = fontColor
                                     )
                                 ){
                                     append("1.456543")
@@ -1585,7 +1585,7 @@ fun HomeComp2(navController: NavController) {
                                     SpanStyle(
                                         fontWeight = FontWeight(400),
                                         fontSize = 17.sp,
-                                        color = Color.White
+                                        color = fontColor
                                     )
                                 ){
                                     append("200.13342")
@@ -1607,7 +1607,7 @@ fun HomeComp2(navController: NavController) {
                                     SpanStyle(
                                         fontWeight = FontWeight(400),
                                         fontSize = 17.sp,
-                                        color = Color.White
+                                        color = fontColor
                                     )
                                 ){
                                     append("0.11032")

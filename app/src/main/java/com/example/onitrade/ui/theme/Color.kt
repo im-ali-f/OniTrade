@@ -21,6 +21,8 @@ val BTCColor = Color(0xFFE7953D)
 val BTCColorBrush = Color(0x8DE7953D)
 val PPCColor = Color(0xFF00B346)
 val ETHColor = Color(0xFF6E84FF)
+val XLMColor = Color(0xFF50B6E4)
+
 
 
 

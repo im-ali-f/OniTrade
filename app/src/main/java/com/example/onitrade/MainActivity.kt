@@ -73,7 +73,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         //inside scaffold
 
-                        NavHost(navController = navState, startDestination = "homePage") {
+                        NavHost(navController = navState, startDestination = "tradePage") {
                             composable(route = "homePage") {
                                 if(screenWidth<400) {
                                     HomeComp(navState)
@@ -82,6 +82,12 @@ class MainActivity : ComponentActivity() {
                                     HomeComp2(navState)
                                 }
                                 selected.value = "homePage"
+                                //DrawCubic()
+                            }
+
+                            composable(route = "tradePage") {
+                                TradeComp(navState)
+                                selected.value = "tradePage"
                                 //DrawCubic()
                             }
                         }
